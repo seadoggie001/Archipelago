@@ -2,34 +2,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
-from pathlib import Path
-from yaml import safe_load
 
 from BaseClasses import Location, Region
-from .Data.Strings import REGION
+from .Data.Location import ALL_LOCATION_DATA, LocationData
+from .Data.Region import RegionNames
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
 
-
-@dataclass
-class LocationData:
-    name: str
-    id: int
-    region: str
-    requirements: list[str] | None = None
-
-
-ACHIEVEMENTS: list[LocationData] = []
-
-with open(Path(__file__).resolve().parent / "Data/data.yaml", "r") as file:
-    config_data = safe_load(file)
-for location in config_data["locations"]:
-    ACHIEVEMENTS.append(
-        LocationData(location["name"], location["id"], location["region"], location.get("requirements", None)))
-
 ALL_LOCATIONS: list[LocationData] = (
-    ACHIEVEMENTS
+    ALL_LOCATION_DATA
 )
 
 # Remember, locations don't have to be completed. These are "steps" along the way to completing the game, but might be optional
@@ -52,7 +34,7 @@ def create_all_locations(world: TFWRWorld) -> None:
 def create_achieve_locations(world: TFWRWorld) -> None:
     # For each region
     regionName: str
-    for regionName in REGION.Regions:
+    for regionName in RegionNames.Regions:
         region: Region = world.get_region(regionName)
         # Get all locations with a matching region
         locations = get_location_names_with_ids(

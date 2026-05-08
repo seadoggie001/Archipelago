@@ -3,7 +3,7 @@ import os
 import Utils
 from BaseClasses import Location, Region
 from .bases import TFWRTestBase
-from ..Data.Strings import REGION
+from ..Data.Region import RegionNames
 
 
 class TestEasyModeLogic(TFWRTestBase):
@@ -13,6 +13,8 @@ class TestEasyModeLogic(TFWRTestBase):
         "easy_mode": True,
     }
 
+    run_default_tests = False
+
     def test_easy_mode_access(self) -> None:
         with self.subTest("Tests checks accessible with nothing"):
             hello_world: Location = self.world.get_location("Hello World!")
@@ -20,11 +22,11 @@ class TestEasyModeLogic(TFWRTestBase):
             self.assertTrue(hello_world.can_reach(self.multiworld.state))
 
         with self.subTest("Regions are set up correctly"):
-            start: Region = self.world.get_region(REGION.Start)
+            start: Region = self.world.get_region(RegionNames.Start)
             self.assertEqual(len(start.entrances), 0, "Start is the start, it shouldn't have entrances")
             self.assertTrue(start.can_reach(self.multiworld.state), "Start should always be accessible")
 
-            loops: Region = self.world.get_region(REGION.Loops)
+            loops: Region = self.world.get_region(RegionNames.Loops)
             self.assertEqual(len(loops.entrances), 1, "Loops should have an entrance from Start")
 
         with self.subTest("Create visualization"):

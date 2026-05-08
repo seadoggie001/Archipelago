@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from BaseClasses import Region
-from .Data.Strings import REGION, UPGRADE
+from .Data.Region import ALL_REGION_DATA
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -20,20 +20,6 @@ class RegionData:
     def __post_init__(self):
         if self.parent is not None:
             self.entrance_name = f"{self.parent} to {self.name}"
-
-
-# This list must be sorted like a hierarchy: Dependent regions come after their parents
-ALL_REGION_DATA: list[RegionData] = [
-    RegionData(REGION.Start),
-    RegionData(REGION.Loops, REGION.Start, [UPGRADE.Loop]),
-    RegionData(REGION.Cactus, REGION.Loops, [UPGRADE.Cactus, UPGRADE.Plant, UPGRADE.Carrot]),
-    RegionData(REGION.Maze, REGION.Loops, [UPGRADE.Fertilizer, UPGRADE.Mazes, UPGRADE.Plant, UPGRADE.Watering]),
-    RegionData(REGION.Sunflower, REGION.Maze, [UPGRADE.Lists, UPGRADE.Plant]),
-    RegionData(REGION.Pumpkins, REGION.Loops, [UPGRADE.Pumpkins, UPGRADE.Plant, UPGRADE.Carrot]),
-    RegionData(REGION.Drones, REGION.Sunflower, [UPGRADE.Megafarm]),
-    RegionData(REGION.Dinos, REGION.Sunflower, [UPGRADE.Dinosaurs, UPGRADE.Plant, UPGRADE.Carrot]),
-    RegionData(REGION.EndGame, REGION.Drones, [UPGRADE.Functions]),
-]
 
 
 def create_and_connect_regions(world: TFWRWorld) -> None:
