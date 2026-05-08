@@ -1,0 +1,84 @@
+[
+  {
+    "name": "Start"
+  },
+  {
+    "name": "Loops",
+    "parent": "Start",
+    "requirements": [
+      "Loop"
+    ],
+    "entrance_name": "Start to Loops"
+  },
+  {
+    "name": "Cactus",
+    "parent": "Loops",
+    "requirements": [
+      "Cactus",
+      "Plant",
+      "Carrot",
+      "Operators"
+    ],
+    "entrance_name": "Loops to Cactus"
+  },
+  {
+    "name": "Maze",
+    "parent": "Loops",
+    "requirements": [
+      "Fertilizer",
+      "Mazes",
+      "Plant",
+      "Watering"
+    ],
+    "entrance_name": "Loops to Maze"
+  },
+  {
+    "name": "Sunflower",
+    "parent": "Maze",
+    "requirements": [
+      "Variables",
+      "Plant",
+      "Sunflowers",
+      "Operators"
+    ],
+    "entrance_name": "Maze to Sunflower"
+  },
+  {
+    "name": "Pumpkins",
+    "parent": "Loops",
+    "requirements": [
+      "Pumpkins",
+      "Plant",
+      "Carrot",
+      "Variables"
+    ],
+    "entrance_name": "Loops to Pumpkins"
+  },
+  {
+    "name": "Drones",
+    "parent": "Sunflower",
+    "requirements": [
+      "Megafarm",
+      "Functions"
+    ],
+    "entrance_name": "Sunflower to Drones"
+  },
+  {
+    "name": "Dinos",
+    "parent": "Cactus",
+    "requirements": [
+      "Dinosaurs",
+      "Plant",
+      "Carrot"
+    ],
+    "entrance_name": "Cactus to Dinos"
+  },
+  {
+    "name": "EndGame",
+    "parent": "Drones",
+    "requirements": [
+      "Functions"
+    ],
+    "entrance_name": "Drones to EndGame"
+  }
+]
