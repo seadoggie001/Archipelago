@@ -1,3 +1,6 @@
+import dataclasses
+
+
 class RuleNames:
     """Custom rules to be manually resolved"""
     AnyHatItems = "AnyHatItems"
@@ -7,3 +10,9 @@ class RuleNames:
     CropsThatCanProduceWeirdSubstance = "Crops that can produce Weird Substance"
     """the player has a crop that produces multiple items"""
     Rules: list[str] = [AnyHatItems, ReallyBigFarm, CropsThatCanProduceWeirdSubstance]
+
+
+@dataclasses.dataclass
+class Requirement:
+    name: str
+    count: int

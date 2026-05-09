@@ -26,8 +26,8 @@ class TestEasyModeLogic(TFWRTestBase):
             self.assertEqual(len(start.entrances), 0, "Start is the start, it shouldn't have entrances")
             self.assertTrue(start.can_reach(self.multiworld.state), "Start should always be accessible")
 
-            loops: Region = self.world.get_region(RegionNames.Loops)
-            self.assertEqual(len(loops.entrances), 1, "Loops should have an entrance from Start")
+            crop: Region = self.world.get_region(RegionNames.Crop)
+            self.assertEqual(len(crop.entrances), 1, "Crop should have an entrance from Start")
 
         with self.subTest("Create visualization"):
             """ This builds PUML files, it is not a test """

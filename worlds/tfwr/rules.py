@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Counter
+from typing import TYPE_CHECKING
 
 from rule_builder.options import OptionFilter
-from rule_builder.rules import Has, HasAll, Rule, True_, HasAny, CanReachLocation
+from rule_builder.rules import Has, Rule, True_, HasAny, CanReachLocation
 from .Data.Item import ItemNames
-from .Data.Location import ALL_LOCATION_DATA, Requirement
-from .Data.Region import RegionNames, ALL_REGION_DATA
+from .Data.Location import ALL_LOCATION_DATA
+from .Data.Region import ALL_REGION_DATA
+from .Data.Rules import RuleNames, Requirement
 from .options import EasyMode
-from .Data.Rules import RuleNames
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -27,10 +27,7 @@ def set_all_entrance_rules(world: TFWRWorld) -> None:
     for region_data in ALL_REGION_DATA:
         if region_data.requirements is not None:
             entrance = world.get_entrance(region_data.entrance_name)
-            world.set_rule(entrance, HasAll(*region_data.requirements))
-        elif region_data.name == RegionNames.EndGame:
-            entrance = world.get_entrance(region_data.entrance_name)
-            world.set_rule(entrance, Has(ItemNames.Expand, 9))
+            world.set_rule(entrance, resolve_rules(region_data.requirements))
 
 
 def set_all_location_rules(world: TFWRWorld) -> None:
@@ -67,10 +64,10 @@ def resolve_rules(loc_requirements: list[Requirement | str]) -> Rule[TFWRWorld]:
                     rule &= Has(ItemNames.Expand, 9)
                 case RuleNames.CropsThatCanProduceWeirdSubstance:
                     rule &= (
-                            HasAll(ItemNames.Grass, ItemNames.Grass + "++")
-                            | (HasAll(ItemNames.Carrot, ItemNames.Carrot + "++"))
+                            Has(ItemNames.Grass, 2)
+                            | Has(ItemNames.Carrot, 2)
                             | Has(ItemNames.Trees)
-                            | (HasAll(ItemNames.Cactus, ItemNames.Cactus + "++"))
+                            | Has(ItemNames.Cactus, 2)
                             | Has(ItemNames.Pumpkins)
                     )
                 case _:

@@ -105,12 +105,15 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ),
     ItemData(
         id=11008,
-        name=ItemNames.Watering
+        name=ItemNames.Watering,
+        count=1,
+        secondary_classification=ItemClassification.filler,
+        secondary_count=8,
     ),
     ItemData(
         id=11009,
         name=ItemNames.Fertilizer,
-        secondary_count=3
+        count=4
     ),
     ItemData(
         id=11010,
@@ -149,7 +152,7 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11018,
         name=ItemNames.Dinosaurs,
-        secondary_count=5
+        count=6,
     ),
     ItemData(
         id=11019,
@@ -226,12 +229,6 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11035,
         name=ItemNames.Unlock,
-        classification=ItemClassification.filler
-    ),
-    ItemData(
-        id=11038,
-        name=ItemNames.Watering + UpgradeName,
-        count=8,
         classification=ItemClassification.filler
     ),
 ]

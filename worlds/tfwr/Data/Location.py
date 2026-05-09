@@ -2,7 +2,7 @@ import dataclasses
 
 from ..Data.Item import ItemNames
 from ..Data.Region import RegionNames
-from ..Data.Rules import RuleNames
+from ..Data.Rules import RuleNames, Requirement
 
 
 @dataclasses.dataclass
@@ -16,12 +16,6 @@ class TimedStatistic:
     key: str
     value: str
     time: str
-
-
-@dataclasses.dataclass
-class Requirement:
-    name: str
-    count: int
 
 
 @dataclasses.dataclass
@@ -42,24 +36,6 @@ class LocationData:
 
 
 # Location identifiers start at 10K and are grouped by categories into their own 1K ids. "Categories" are not regions.
-# May 3
-# - Swap regions of 100 and 1K hay
-# - Remove Tree requirement from planting a bush
-# - Rename "Bring us a shrubbery" (duplicate name)
-# - Variables for pumpkin region, remove duplicate requirements
-# May 7
-# - Require expand for 1K wood
-# - Sunflower region requires variables, not lists
-# - Drone region requires functions
-# - Swarm requires all drones
-# - Dino region's parent is Cacti
-# - Added more Wood statistic locations
-# - Fashion show needs 5 drones
-# - Larger sunflowers (anything past 100) needs expand x3 to get x8 multiplier
-
-# ToDo: Max length dino cannot be possible on a single square
-# ToDo: More power requires larger farm
-
 ALL_LOCATION_DATA: list[LocationData] = [
     # region 10Ks Not crop related
     LocationData(
@@ -73,8 +49,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         10001,
         name="Ouroboros",
         description="Create an infinite loop",
-        region=RegionNames.Loops,
-        achievement="INFINITE_LOOP"
+        region=RegionNames.Start,
+        achievement="INFINITE_LOOP",
+        requirements=[ItemNames.Loop],
     ),
     LocationData(
         10002,
@@ -110,7 +87,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         10006,
         name="What are you doing in my swamp!?",
         description="Make the entire farm have a water level > 0.5",
-        region=RegionNames.Loops,
+        region=RegionNames.Start,
         achievement="MUD_FARM",
         requirements=[ItemNames.Watering]
     ),
@@ -134,49 +111,50 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Wear a hat",
         region=RegionNames.Start,
         achievement="EQUIP_A_NEW_HAT",
-        requirements=[RuleNames.AnyHatItems]
+        requirements=[RuleNames.AnyHatItems],
     ),
     LocationData(
         10010,
         name="Ancient Lizard Hat",
         description="Equip the dinosaur hat",
         region=RegionNames.Dinos,
-        achievement="EQUIP_DINO_HAT"
+        achievement="EQUIP_DINO_HAT",
     ),
     LocationData(
         10011,
         name="Healer",
         description="Heal an infected plant",
-        region=RegionNames.Maze,
-        achievement="HEALER"
+        region=RegionNames.Start,
+        achievement="HEALER",
     ),
     LocationData(
         10012,
         name="Big Farm",
         description="Reach the maximum farm size",
         region=RegionNames.EndGame,
-        achievement="BIG_FARM"
+        achievement="BIG_FARM",
+        requirements=[Requirement(ItemNames.Expand,9)],
     ),
     LocationData(
         10013,
         name="Chaos",
         description="Open 20 windows at once. You monster.",
         region=RegionNames.Start,
-        achievement="CHAOS"
+        achievement="CHAOS",
     ),
     LocationData(
         10014,
         name="sutcaC",
         description="Sort a full field of cactus the wrong way round",
         region=RegionNames.Cactus,
-        achievement="WRONG_ORDER"
+        achievement="WRONG_ORDER",
     ),
     LocationData(
         10015,
         name="Patagotitan",
         description="Have a dinosaur that fills the entire farm",
         region=RegionNames.Dinos,
-        achievement="LONG_DINOSAUR"
+        achievement="LONG_DINOSAUR",
     ),
     LocationData(
         10016,
@@ -184,44 +162,46 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Have 32 drones at once",
         region=RegionNames.Drones,
         achievement="SWARM",
-        requirements=[Requirement(ItemNames.Megafarm, 5)]
+        requirements=[Requirement(ItemNames.Megafarm, 5)],
     ),
     LocationData(
         10017,
         name="Stack Overflow",
         description="Stack overflow. Not the website.",
-        region=RegionNames.EndGame,
-        achievement="STACK_OVERFLOW"
+        region=RegionNames.Start,
+        achievement="STACK_OVERFLOW",
+        requirements=[ItemNames.Functions],
     ),
     LocationData(
         10018,
         name="Circular Import",
         description="Import a file from another file that imports from...",
-        region=RegionNames.Maze,
+        region=RegionNames.Start,
         achievement="CIRCULAR_IMPORT",
-        requirements=[ItemNames.Import]
+        requirements=[ItemNames.Import],
     ),
     LocationData(
         10019,
         name="Prize Pumpkin",
         description="Harvest a 32x32 pumpkin",
-        region=RegionNames.EndGame,
+        region=RegionNames.Pumpkins,
         achievement="GIANT_PUMPKIN",
-        requirements=[RuleNames.ReallyBigFarm]
+        requirements=[RuleNames.ReallyBigFarm],
     ),
     LocationData(
         10020,
         name="Size Matters",
         description="Get a dinosaur to length 1K",
         region=RegionNames.Dinos,
-        achievement="SIZE_MATTERS"
+        achievement="SIZE_MATTERS",
     ),
     LocationData(
         10021,
         name="Recycling",
         description="Reuse the same maze 300 times",
         region=RegionNames.Maze,
-        achievement="RECYCLING"
+        achievement="RECYCLING",
+        requirements=[Requirement(ItemNames.Fertilizer, 3)],
     ),
     LocationData(
         10022,
@@ -229,21 +209,25 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Equip 5 different hats on 5 drones",
         region=RegionNames.Drones,
         achievement="FASHION_SHOW",
-        requirements=[Requirement(ItemNames.Megafarm, 3)]
+        requirements=[
+            Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Hats
+        ],
     ),
     LocationData(
         10023,
         name="What now",
         description="Unlock the entire game",
         region=RegionNames.EndGame,
-        achievement="UNLOCK_EVERYTHING"
+        achievement="UNLOCK_EVERYTHING",
+        #ToDo: Probably ignore this achievement. It'd require making everything a progression item, I think.
     ),
     LocationData(
         10024,
         name="Maze",
         description="Spawn a maze",
         region=RegionNames.Maze,
-        achievement="SPAWN_MAZE"
+        achievement="SPAWN_MAZE",
     ),
     # endregion
     # region 11Ks Flips
@@ -252,30 +236,51 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="Acrobat",
         description="Do a flip!",
         achievement="DO_A_FLIP",
-        region=RegionNames.Start,
-        statistic=Statistic("flips", "1")),
+        region=RegionNames.Flip,
+        statistic=Statistic("flips", "1")
+    ),
     LocationData(
         11001,
-        name="Master Acrobat",
-        description="Flip 1K times",
-        region=RegionNames.Loops,
-        statistic=Statistic("flips", "1K"),
-        requirements=[ItemNames.Megafarm, ItemNames.Functions]
+        name="Flipping Awesome",
+        description="Flip 100 times",
+        region=RegionNames.Flip,
+        statistic=Statistic("flips", "100"),
     ),
     LocationData(
         11002,
-        name="Flipping Awesome",
-        description="Flip 100 times",
-        region=RegionNames.Loops,
-        statistic=Statistic("flips", "100")
+        name="Master Acrobat",
+        description="Flip 1K times",
+        region=RegionNames.Flip,
+        statistic=Statistic("flips", "1K"),
+        requirements=[
+            ItemNames.Loop,
+            ItemNames.Megafarm,
+            ItemNames.Functions,
+        ],
     ),
     LocationData(
         11003,
         name="All the flips",
         description="Flip 10K times",
-        region=RegionNames.EndGame,
+        region=RegionNames.Flip,
         statistic=Statistic("flips", "10K"),
-        requirements=[]
+        requirements=[
+            ItemNames.Loop,
+            Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Functions,
+        ],
+    ),
+    LocationData(
+        11004,
+        name="Just keep flipping, just keep flipping",
+        description="Flip 100K times",
+        region=RegionNames.Flip,
+        statistic=Statistic("flips", "100K"),
+        requirements=[
+            ItemNames.Loop,
+            Requirement(ItemNames.Megafarm, 5),
+            ItemNames.Functions,
+        ],
     ),
     # endregion
     # region 12Ks Plant one crop
@@ -283,43 +288,46 @@ ALL_LOCATION_DATA: list[LocationData] = [
         12001,
         name="Bring Me a shrubbery!",
         description="Plant a bush",
-        region=RegionNames.Loops,
+        region=RegionNames.Crop,
         achievement="PLANT_BUSH"
     ),
     LocationData(
         12002,
         name="Carrots",
         description="Plant a carrot",
-        region=RegionNames.Loops,
+        region=RegionNames.Crop,
         achievement="PLANT_CARROTS",
-        requirements=[ItemNames.Carrot, ItemNames.Plant]
+        requirements=[ItemNames.Carrot],
     ),
     LocationData(
         12003,
         name="Pumpkins",
         description="Plant a pumpkin",
-        region=RegionNames.Pumpkins,
-        achievement="PLANT_PUMPKIN"
+        region=RegionNames.Crop,
+        achievement="PLANT_PUMPKIN",
+        requirements=[ItemNames.Carrot, ItemNames.Pumpkins],
     ),
     LocationData(
         12004,
         name="Sunflowers",
         description="Plant a sunflower",
-        region=RegionNames.Sunflower,
-        achievement="PLANT_SUNFLOWER"
+        region=RegionNames.Crop,
+        achievement="PLANT_SUNFLOWER",
+        requirements=[ItemNames.Sunflowers],
     ),
     LocationData(
         12005,
         name="Cacti",
         description="Plant a cactus",
-        region=RegionNames.Cactus,
-        achievement="PLANT_CACTUS"
+        region=RegionNames.Crop,
+        achievement="PLANT_CACTUS",
+        requirements=[ItemNames.Carrot, ItemNames.Pumpkins, ItemNames.Cactus],
     ),
     LocationData(
         12006,
         name="Trees",
         description="Plant a tree",
-        region=RegionNames.Loops,
+        region=RegionNames.Crop,
         achievement="PLANT_TREE",
         requirements=[ItemNames.Trees]
     ),
@@ -329,56 +337,90 @@ ALL_LOCATION_DATA: list[LocationData] = [
         13000,
         name="Hay Fever",
         description="Farm 100 hay",
-        region=RegionNames.Start,
-        statistic=Statistic("hay", "100")
+        region=RegionNames.Hay,
+        statistic=Statistic("hay", "100"),
     ),
     LocationData(
         13001,
         name="Hey, Farmer!",
         description="Farm 1K Hay",
-        region=RegionNames.Loops,
+        region=RegionNames.Hay,
         statistic=Statistic(key="hay", value="1K"),
-        requirements=[ItemNames.Megafarm, Requirement(ItemNames.Grass, 2)]
+        requirements=[
+            Requirement(ItemNames.Grass, 2)
+        ],
     ),
     LocationData(
         13002,
         name="Cause I have farmed 10K Hay",
         description="Farm 10K hay",
-        region=RegionNames.EndGame,
+        region=RegionNames.Hay,
         statistic=Statistic("hay", "10K"),
-        requirements=[Requirement(ItemNames.Grass, 3)]
+        requirements=[
+            ItemNames.Functions,
+            ItemNames.Megafarm,
+            Requirement(ItemNames.Grass, 3)
+        ],
     ),
     LocationData(
         13003,
         name="Hay Master",
         description="Farm 100K hay",
-        region=RegionNames.EndGame,
+        region=RegionNames.Hay,
         statistic=Statistic("hay", "100K"),
-        requirements=[ItemNames.Grass]
+        requirements=[
+            ItemNames.Functions,
+            Requirement(ItemNames.Megafarm, 2),
+            Requirement(ItemNames.Grass, 4),
+        ],
     ),
     LocationData(
         13004,
         name="Hay Master",
         description="Farm 1M hay",
-        region=RegionNames.EndGame,
+        region=RegionNames.Hay,
         statistic=Statistic("hay", "1M"),
-        requirements=[ItemNames.Grass]
+        requirements=[
+            ItemNames.Functions,
+            Requirement(ItemNames.Megafarm, 3),
+            Requirement(ItemNames.Grass, 6),
+        ],
     ),
     LocationData(
         13005,
-        name="Hay Master",
-        description="Farm 100M hay",
-        region=RegionNames.EndGame,
-        statistic=Statistic("hay", "100M"),
-        requirements=[ItemNames.Grass]
+        name="10M Hay",
+        description="Farm 10M hay",
+        region=RegionNames.Hay,
+        statistic=Statistic("hay", "10M"),
+        requirements=[
+            ItemNames.Functions,
+            Requirement(ItemNames.Megafarm, 3),
+            Requirement(ItemNames.Grass, 7),
+        ],
     ),
     LocationData(
         13006,
+        name="Hay Master",
+        description="Farm 100M hay",
+        region=RegionNames.Hay,
+        statistic=Statistic("hay", "100M"),
+        requirements=[
+            ItemNames.Functions,
+            Requirement(ItemNames.Megafarm, 4),
+            Requirement(ItemNames.Grass, 8),
+        ],
+    ),
+    LocationData(
+        13007,
         name="Big Hay Farmer",
         description="Farm 1B hay",
-        region=RegionNames.EndGame,
+        region=RegionNames.Hay,
         statistic=Statistic("hay", "1B"),
-        requirements=[ItemNames.Grass]
+        requirements=[
+            ItemNames.Functions,
+            Requirement(ItemNames.Megafarm, 5),
+            Requirement(ItemNames.Grass, 10),
+        ],
     ),
     # endregion
     # region 15Ks Carrot
@@ -386,57 +428,89 @@ ALL_LOCATION_DATA: list[LocationData] = [
         15000,
         name="Must be a bunny",
         description="Farm 100 carrots",
-        region=RegionNames.Loops,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrot", "100"),
-        requirements=[ItemNames.Carrot, ItemNames.Plant]
     ),
     LocationData(
         15001,
         name="Carrot Farmer",
         description="Farm 1K carrots",
-        region=RegionNames.Loops,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrot", "1K"),
-        requirements=[ItemNames.Carrot, ItemNames.Plant, ItemNames.Expand]
+        requirements=[
+            ItemNames.Expand
+        ],
     ),
     LocationData(
-        15001,
+        15002,
         name="10K carrots",
         description="Farm 10K carrots",
-        region=RegionNames.Loops,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrot", "10K"),
-        requirements=[ItemNames.Carrot, ItemNames.Plant, ItemNames.Expand]
+        requirements=[
+            Requirement(ItemNames.Carrot, 2),
+            Requirement(ItemNames.Expand, 2),
+        ],
     ),
     LocationData(
         15003,
         name="100K Carrots",
         description="Farm 100K carrots",
-        region=RegionNames.Loops,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrot", "100K"),
-        requirements=[ItemNames.Carrot, ItemNames.Plant, ItemNames.Expand]
+        requirements=[
+            Requirement(ItemNames.Carrot, 4),
+            Requirement(ItemNames.Expand, 3),
+            ItemNames.Megafarm,
+        ],
     ),
     LocationData(
         15004,
         name="All the carrots",
         description="Farm 1M carrots",
-        region=RegionNames.EndGame,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrots", "1M"),
-        requirements=[]
+        requirements=[
+            Requirement(ItemNames.Carrot, 6),
+            Requirement(ItemNames.Expand, 4),
+            Requirement(ItemNames.Megafarm, 2),
+        ],
     ),
     LocationData(
         15005,
-        name="100M Carrots",
-        description="Farm 100M carrots",
-        region=RegionNames.EndGame,
-        statistic=Statistic("carrots", "100M"),
-        requirements=[]
+        name="10M Carrots",
+        description="Farm 10M carrots",
+        region=RegionNames.Carrot,
+        statistic=Statistic("carrots", "10M"),
+        requirements=[
+            Requirement(ItemNames.Carrot, 7),
+            Requirement(ItemNames.Expand, 4),
+            Requirement(ItemNames.Megafarm, 3),
+        ],
     ),
     LocationData(
         15006,
+        name="100M Carrots",
+        description="Farm 100M carrots",
+        region=RegionNames.Carrot,
+        statistic=Statistic("carrots", "100M"),
+        requirements=[
+            Requirement(ItemNames.Carrot, 8),
+            Requirement(ItemNames.Expand, 5),
+            Requirement(ItemNames.Megafarm, 3),
+        ],
+    ),
+    LocationData(
+        15007,
         name="Orange you glad you're done with carrots?",
         description="Farm 1B carrots",
-        region=RegionNames.EndGame,
+        region=RegionNames.Carrot,
         statistic=Statistic("carrot", "1B"),
-        requirements=[ItemNames.Carrot]
+        requirements=[
+            Requirement(ItemNames.Carrot, 10),
+            Requirement(ItemNames.Expand, 9),
+            Requirement(ItemNames.Megafarm, 5),
+        ],
     ),
     # endregion
     # region 16Ks Wood
@@ -444,57 +518,76 @@ ALL_LOCATION_DATA: list[LocationData] = [
         16000,
         name="100 Wood",
         description="Farm 100 wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "100"),
-        requirements=[ItemNames.Plant]
     ),
     LocationData(
         16001,
         name="Deforestation",
         description="Farm 1K Wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "1K"),
-        requirements=[ItemNames.Trees, ItemNames.Plant, ItemNames.Expand]
+        requirements=[ItemNames.Expand],
     ),
     LocationData(
         16002,
         name="10K Wood",
         description="Farm 10K Wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "10K"),
-        requirements=[Requirement(ItemNames.Trees, 2), ItemNames.Plant, Requirement(ItemNames.Expand, 2)]
+        requirements=[
+            Requirement(ItemNames.Trees, 2),
+            Requirement(ItemNames.Expand, 2),
+            Requirement(ItemNames.Megafarm, 1),
+        ],
     ),
     LocationData(
         16003,
         name="100K Wood",
         description="Farm 100K Wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "100K"),
-        requirements=[Requirement(ItemNames.Trees, 3), ItemNames.Plant, Requirement(ItemNames.Expand, 2)]
+        requirements=[
+            Requirement(ItemNames.Trees, 3),
+            Requirement(ItemNames.Expand, 3),
+            Requirement(ItemNames.Megafarm, 2),
+        ],
     ),
     LocationData(
         16004,
         name="1M Wood",
         description="Farm 1M Wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "1M"),
-        requirements=[Requirement(ItemNames.Trees, 5), ItemNames.Plant, Requirement(ItemNames.Expand, 2)]
+        requirements=[
+            Requirement(ItemNames.Trees, 5),
+            Requirement(ItemNames.Expand, 5),
+            Requirement(ItemNames.Megafarm, 3),
+        ],
     ),
     LocationData(
         16005,
         name="100M Wood",
         description="Farm 100M Wood",
-        region=RegionNames.Loops,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "100M"),
-        requirements=[Requirement(ItemNames.Trees, 8), ItemNames.Plant, Requirement(ItemNames.Expand, 2)]
+        requirements=[
+            Requirement(ItemNames.Trees, 8),
+            Requirement(ItemNames.Expand, 7),
+            Requirement(ItemNames.Megafarm, 4),
+        ],
     ),
     LocationData(
         16006,
         name="Big Wood Farmer",
         description="Farm 1B wood",
-        region=RegionNames.EndGame,
+        region=RegionNames.Wood,
         statistic=Statistic("wood", "1B"),
-        requirements=[Requirement(ItemNames.Trees, 10)]
+        requirements=[
+            Requirement(ItemNames.Trees, 10),
+            Requirement(ItemNames.Expand, 9),
+            Requirement(ItemNames.Megafarm, 5),
+        ],
     ),
     # endregion
     # region 17Ks Pumpkin
@@ -510,15 +603,22 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="Pumpkin Farmer",
         description="Farm 1K Pumpkins",
         region=RegionNames.Pumpkins,
-        statistic=Statistic("pumpkin", "1K")
+        statistic=Statistic("pumpkin", "1K"),
+        requirements=[
+            Requirement(ItemNames.Pumpkins, 2),
+            Requirement(ItemNames.Expand, 3),
+        ],
     ),
     LocationData(
         17002,
         name="Big Pumpkin Farmer",
         description="Farm 100M pumpkins",
-        region=RegionNames.EndGame,
+        region=RegionNames.Pumpkins,
         statistic=Statistic("pumpkin", "100M"),
-        requirements=[ItemNames.Pumpkins],
+        requirements=[
+            Requirement(ItemNames.Pumpkins, 6),
+            Requirement(ItemNames.Expand, 4),
+        ],
     ),
     # endregion
     # region 18Ks Power
@@ -536,23 +636,29 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Sunflower,
         achievement="POWER_FARMER",
         statistic=Statistic("power", "1K"),
-        requirements=[Requirement(ItemNames.Expand, 3)],
+        requirements=[
+            Requirement(ItemNames.Expand, 3),
+        ],
     ),
     LocationData(
         18002,
         name="Over 9000!",
         description="Farm 9001 power",
-        region=RegionNames.Drones,
+        region=RegionNames.Sunflower,
         statistic=Statistic("power", "9001"),
-        requirements=[Requirement(ItemNames.Expand, 3)],
+        requirements=[
+            Requirement(ItemNames.Expand, 3),
+        ],
     ),
     LocationData(
         18003,
         name="Unlimited Power Farmer",
         description="Farm 100K Power",
-        region=RegionNames.EndGame,
+        region=RegionNames.Sunflower,
         statistic=Statistic("power", "100K"),
-        requirements=[Requirement(ItemNames.Expand, 3)],
+        requirements=[
+            Requirement(ItemNames.Expand, 3),
+        ],
     ),
     # endregion
     # region 19Ks Cacti
@@ -613,11 +719,27 @@ ALL_LOCATION_DATA: list[LocationData] = [
     ),
     LocationData(
         21001,
+        name="10K Bones",
+        description="Farm 10K Bones",
+        region=RegionNames.Dinos,
+        statistic=Statistic("bone", "10K"),
+        requirements=[Requirement(ItemNames.Dinosaurs, 2)],
+    ),
+    LocationData(
+        21002,
+        name="1M Bones",
+        description="Farm 1M Bones",
+        region=RegionNames.Dinos,
+        statistic=Statistic("bone", "1M"),
+        requirements=[Requirement(ItemNames.Dinosaurs, 3)],
+    ),
+    LocationData(
+        21003,
         name="Big Bone Farmer",
         description="Farm",
-        region=RegionNames.EndGame,
+        region=RegionNames.Dinos,
         statistic=Statistic("bone", "100M"),
-        requirements=[ItemNames.Dinosaurs]
+        requirements=[Requirement(ItemNames.Dinosaurs, 5)],
     ),
     # endregion
     # region 22Ks Weird Substance
@@ -625,25 +747,47 @@ ALL_LOCATION_DATA: list[LocationData] = [
         22000,
         name="A bit weird",
         description="Farm 1 weird substance",
-        region=RegionNames.Loops,
+        region=RegionNames.WeirdSubstance,
         statistic=Statistic("weird_substance", "1"),
-        requirements=[ItemNames.Fertilizer]
     ),
     LocationData(
         22001,
         name="That's kinda weird",
         description="Farm 100 weird substance",
-        region=RegionNames.Loops,
+        region=RegionNames.WeirdSubstance,
         statistic=Statistic("weird_substance", "100"),
-        requirements=[ItemNames.Fertilizer]
     ),
     LocationData(
         22002,
         name="That's really weird",
         description="Farm 1K weird substance",
-        region=RegionNames.Loops,
-        statistic=Statistic("weird_substance", "1000"),
-        requirements=[ItemNames.Fertilizer, ItemNames.Megafarm]
+        region=RegionNames.WeirdSubstance,
+        statistic=Statistic("weird_substance", "1K"),
+        requirements=[ItemNames.Megafarm],
+    ),
+    LocationData(
+        22003,
+        name="10K Weird Substance",
+        description="Farm 10K weird substance",
+        region=RegionNames.WeirdSubstance,
+        statistic=Statistic("weird_substance", "10K"),
+        requirements=[
+            Requirement(ItemNames.Megafarm, 2),
+            Requirement(ItemNames.Expand, 2),
+            Requirement(ItemNames.Fertilizer, 2),
+        ],
+    ),
+    LocationData(
+        22004,
+        name="100K Weird Substance",
+        description="Farm 100K weird substance",
+        region=RegionNames.WeirdSubstance,
+        statistic=Statistic("weird_substance", "100K"),
+        requirements=[
+            Requirement(ItemNames.Megafarm, 3),
+            Requirement(ItemNames.Expand, 3),
+            Requirement(ItemNames.Fertilizer, 3),
+        ],
     ),
     # endregion
     # region 99Ks Timing
@@ -697,4 +841,4 @@ ALL_LOCATION_DATA: list[LocationData] = [
     ),
     # endregion
 ]
-# All location data including names, descriptions, regions, and rules
+"""All location data including names, descriptions, regions, and rules."""

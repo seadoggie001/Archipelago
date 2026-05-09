@@ -1,25 +1,17 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from BaseClasses import Region
-from .Data.Region import ALL_REGION_DATA
+from .Data.Region import ALL_REGION_DATA, RegionData
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
 
 
-@dataclass
-class RegionData:
-    name: str
-    parent: str = None
-    requirements: list[str] | None = None
-    entrance_name: str = ""
-
-    def __post_init__(self):
-        if self.parent is not None:
-            self.entrance_name = f"{self.parent} to {self.name}"
+def __post_init__(self):
+    if self.parent is not None:
+        self.entrance_name = f"{self.parent} to {self.name}"
 
 
 def create_and_connect_regions(world: TFWRWorld) -> None:

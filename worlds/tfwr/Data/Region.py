@@ -1,26 +1,33 @@
 from dataclasses import dataclass
 
+from .Rules import RuleNames, Requirement
 from ..Data.Item import ItemNames
 
 
 class RegionNames:
     Start = "Start"
-    Loops = "Loops"
+    Crop = "Crop"
+    Flip = "Flip"
+    Hay = "Hay"
+    Wood = "Wood"
+    Carrot = "Carrot"
     Sunflower = "Sunflower"
     Cactus = "Cactus"
+    WeirdSubstance = "WeirdSubstance"
     Maze = "Maze"
     Pumpkins = "Pumpkins"
     Drones = "Drones"
     Dinos = "Dinos"
     EndGame = "EndGame"
-    Regions: list[str] = [Start, Loops, Sunflower, Cactus, Maze, Pumpkins, Drones, Dinos, EndGame]
+    Regions: list[str] = [Start, Crop, Flip, Hay, Wood, Carrot, Sunflower, Cactus, WeirdSubstance, Maze, Pumpkins,
+                          Drones, Dinos, EndGame]
 
 
 @dataclass
 class RegionData:
     name: str
     parent: str = None
-    requirements: list[str] | None = None
+    requirements: list[str | Requirement] | None = None
     entrance_name: str = ""
 
     def __post_init__(self):
@@ -31,48 +38,69 @@ class RegionData:
 # This list must be sorted like a hierarchy: Dependent regions come after their parents
 ALL_REGION_DATA: list[RegionData] = [
     RegionData(
-        name=RegionNames.Start
+        name=RegionNames.Start,
     ),
     RegionData(
-        name=RegionNames.Loops,
+        name=RegionNames.Crop,
         parent=RegionNames.Start,
-        requirements=[ItemNames.Loop]
+        requirements=[ItemNames.Plant],
+    ),
+    RegionData(
+        name=RegionNames.Flip,
+        parent=RegionNames.Start,
+    ),
+    RegionData(
+        name=RegionNames.Hay,
+        parent=RegionNames.Start,
+    ),
+    RegionData(
+        name=RegionNames.Wood,
+        parent=RegionNames.Crop,
+        requirements=[ItemNames.Trees],
+    ),
+    RegionData(
+        name=RegionNames.Carrot,
+        parent=RegionNames.Crop,
+        requirements=[ItemNames.Carrot],
+    ),
+    RegionData(
+        name=RegionNames.WeirdSubstance,
+        parent=RegionNames.Crop,
+        requirements=[RuleNames.CropsThatCanProduceWeirdSubstance, ItemNames.Fertilizer],
     ),
     RegionData(
         name=RegionNames.Maze,
-        parent=RegionNames.Loops,
-        requirements=[ItemNames.Fertilizer, ItemNames.Mazes, ItemNames.Plant, ItemNames.Watering]
+        parent=RegionNames.WeirdSubstance,
+        requirements=[ItemNames.Loop, ItemNames.Fertilizer, ItemNames.Mazes],
     ),
-    # ToDo: Does this really need to have a parent of Maze? It could be Loops, right?
     RegionData(
         name=RegionNames.Sunflower,
-        parent=RegionNames.Maze,
-        requirements=[ItemNames.Variables, ItemNames.Plant, ItemNames.Sunflowers, ItemNames.Operators]
+        parent=RegionNames.Carrot,
+        requirements=[ItemNames.Loop, ItemNames.Variables, ItemNames.Sunflowers, ItemNames.Operators],
     ),
     RegionData(
         name=RegionNames.Pumpkins,
-        parent=RegionNames.Loops,
-        requirements=[ItemNames.Pumpkins, ItemNames.Plant, ItemNames.Carrot, ItemNames.Variables]
+        parent=RegionNames.Carrot,
+        requirements=[ItemNames.Loop, ItemNames.Pumpkins, ItemNames.Carrot, ItemNames.Variables],
     ),
     RegionData(
         name=RegionNames.Cactus,
         parent=RegionNames.Pumpkins,
-        requirements=[ItemNames.Cactus, ItemNames.Operators]
+        requirements=[ItemNames.Cactus, ItemNames.Operators],
     ),
-    # ToDo: This could probably connect to Loops instead. It may need a few speed upgrades though.
     RegionData(
         name=RegionNames.Drones,
-        parent=RegionNames.Sunflower,
-        requirements=[ItemNames.Megafarm, ItemNames.Functions]
+        parent=RegionNames.Start,
+        requirements=[ItemNames.Megafarm, ItemNames.Functions],
     ),
     RegionData(
         name=RegionNames.Dinos,
         parent=RegionNames.Cactus,
-        requirements=[ItemNames.Dinosaurs, ItemNames.Plant, ItemNames.Carrot]
+        requirements=[ItemNames.Dinosaurs],
     ),
     RegionData(
         name=RegionNames.EndGame,
-        parent=RegionNames.Drones,
-        requirements=[ItemNames.Functions]
+        parent=RegionNames.Dinos,
+        requirements=[ItemNames.Functions],
     ),
 ]
