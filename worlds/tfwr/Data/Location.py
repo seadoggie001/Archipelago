@@ -124,7 +124,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         10011,
         name="Healer",
         description="Heal an infected plant",
-        region=RegionNames.Start,
+        region=RegionNames.WeirdSubstance,
         achievement="HEALER",
     ),
     LocationData(
@@ -347,7 +347,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Hay,
         statistic=Statistic(key="hay", value="1K"),
         requirements=[
-            Requirement(ItemNames.Grass, 2)
+            Requirement(ItemNames.Grass, 2),
+            ItemNames.Loop,
         ],
     ),
     LocationData(
@@ -358,6 +359,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic("hay", "10K"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             ItemNames.Megafarm,
             Requirement(ItemNames.Grass, 3)
         ],
@@ -370,18 +372,20 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic("hay", "100K"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 2),
             Requirement(ItemNames.Grass, 4),
         ],
     ),
     LocationData(
         13004,
-        name="Hay Master",
+        name="1M Hay",
         description="Farm 1M hay",
         region=RegionNames.Hay,
         statistic=Statistic("hay", "1M"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 3),
             Requirement(ItemNames.Grass, 6),
         ],
@@ -394,18 +398,20 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic("hay", "10M"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 3),
             Requirement(ItemNames.Grass, 7),
         ],
     ),
     LocationData(
         13006,
-        name="Hay Master",
+        name="100M Hay",
         description="Farm 100M hay",
         region=RegionNames.Hay,
         statistic=Statistic("hay", "100M"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 4),
             Requirement(ItemNames.Grass, 8),
         ],
@@ -418,6 +424,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic("hay", "1B"),
         requirements=[
             ItemNames.Functions,
+            ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 5),
             Requirement(ItemNames.Grass, 10),
         ],
@@ -736,7 +743,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
     LocationData(
         21003,
         name="Big Bone Farmer",
-        description="Farm",
+        description="Farm 100M Bones",
         region=RegionNames.Dinos,
         statistic=Statistic("bone", "100M"),
         requirements=[Requirement(ItemNames.Dinosaurs, 5)],
