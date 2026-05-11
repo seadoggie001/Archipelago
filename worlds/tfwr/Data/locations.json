@@ -10,7 +10,13 @@
     "id": 10001,
     "name": "Ouroboros",
     "description": "Create an infinite loop",
-    "region": "Loops",
+    "region": "Start",
+    "requirements": [
+      {
+        "name": "Loop",
+        "count": 1
+      }
+    ],
     "achievement": "INFINITE_LOOP"
   },
   {
@@ -57,7 +63,7 @@
     "id": 10006,
     "name": "What are you doing in my swamp!?",
     "description": "Make the entire farm have a water level > 0.5",
-    "region": "Loops",
+    "region": "Start",
     "requirements": [
       {
         "name": "Watering",
@@ -104,7 +110,7 @@
     "id": 10011,
     "name": "Healer",
     "description": "Heal an infected plant",
-    "region": "Maze",
+    "region": "WeirdSubstance",
     "achievement": "HEALER"
   },
   {
@@ -112,6 +118,12 @@
     "name": "Big Farm",
     "description": "Reach the maximum farm size",
     "region": "EndGame",
+    "requirements": [
+      {
+        "name": "Expand",
+        "count": 9
+      }
+    ],
     "achievement": "BIG_FARM"
   },
   {
@@ -152,14 +164,20 @@
     "id": 10017,
     "name": "Stack Overflow",
     "description": "Stack overflow. Not the website.",
-    "region": "EndGame",
+    "region": "Start",
+    "requirements": [
+      {
+        "name": "Functions",
+        "count": 1
+      }
+    ],
     "achievement": "STACK_OVERFLOW"
   },
   {
     "id": 10018,
     "name": "Circular Import",
     "description": "Import a file from another file that imports from...",
-    "region": "Maze",
+    "region": "Start",
     "requirements": [
       {
         "name": "Import",
@@ -172,7 +190,7 @@
     "id": 10019,
     "name": "Prize Pumpkin",
     "description": "Harvest a 32x32 pumpkin",
-    "region": "EndGame",
+    "region": "Pumpkins",
     "requirements": [
       {
         "name": "Really Big Farm",
@@ -193,6 +211,12 @@
     "name": "Recycling",
     "description": "Reuse the same maze 300 times",
     "region": "Maze",
+    "requirements": [
+      {
+        "name": "Fertilizer",
+        "count": 3
+      }
+    ],
     "achievement": "RECYCLING"
   },
   {
@@ -201,6 +225,10 @@
     "description": "Equip 5 different hats on 5 drones",
     "region": "Drones",
     "requirements": [
+      {
+        "name": "Hats",
+        "count": 1
+      },
       {
         "name": "Megafarm",
         "count": 3
@@ -226,7 +254,7 @@
     "id": 11000,
     "name": "Acrobat",
     "description": "Do a flip!",
-    "region": "Start",
+    "region": "Flip",
     "achievement": "DO_A_FLIP",
     "statistic": {
       "key": "flips",
@@ -235,9 +263,19 @@
   },
   {
     "id": 11001,
+    "name": "Flipping Awesome",
+    "description": "Flip 100 times",
+    "region": "Flip",
+    "statistic": {
+      "key": "flips",
+      "value": "100"
+    }
+  },
+  {
+    "id": 11002,
     "name": "Master Acrobat",
     "description": "Flip 1K times",
-    "region": "Loops",
+    "region": "Flip",
     "requirements": [
       {
         "name": "Functions",
@@ -245,6 +283,10 @@
       },
       {
         "name": "Megafarm",
+        "count": 1
+      },
+      {
+        "name": "Loop",
         "count": 1
       }
     ],
@@ -254,42 +296,66 @@
     }
   },
   {
-    "id": 11002,
-    "name": "Flipping Awesome",
-    "description": "Flip 100 times",
-    "region": "Loops",
-    "statistic": {
-      "key": "flips",
-      "value": "100"
-    }
-  },
-  {
     "id": 11003,
     "name": "All the flips",
     "description": "Flip 10K times",
-    "region": "EndGame",
+    "region": "Flip",
+    "requirements": [
+      {
+        "name": "Functions",
+        "count": 1
+      },
+      {
+        "name": "Megafarm",
+        "count": 3
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      }
+    ],
     "statistic": {
       "key": "flips",
       "value": "10K"
     }
   },
   {
+    "id": 11004,
+    "name": "Just keep flipping, just keep flipping",
+    "description": "Flip 100K times",
+    "region": "Flip",
+    "requirements": [
+      {
+        "name": "Functions",
+        "count": 1
+      },
+      {
+        "name": "Megafarm",
+        "count": 5
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      }
+    ],
+    "statistic": {
+      "key": "flips",
+      "value": "100K"
+    }
+  },
+  {
     "id": 12001,
     "name": "Bring Me a shrubbery!",
     "description": "Plant a bush",
-    "region": "Loops",
+    "region": "Crop",
     "achievement": "PLANT_BUSH"
   },
   {
     "id": 12002,
     "name": "Carrots",
     "description": "Plant a carrot",
-    "region": "Loops",
+    "region": "Crop",
     "requirements": [
-      {
-        "name": "Plant",
-        "count": 1
-      },
       {
         "name": "Carrot",
         "count": 1
@@ -301,28 +367,58 @@
     "id": 12003,
     "name": "Pumpkins",
     "description": "Plant a pumpkin",
-    "region": "Pumpkins",
+    "region": "Crop",
+    "requirements": [
+      {
+        "name": "Pumpkins",
+        "count": 1
+      },
+      {
+        "name": "Carrot",
+        "count": 1
+      }
+    ],
     "achievement": "PLANT_PUMPKIN"
   },
   {
     "id": 12004,
     "name": "Sunflowers",
     "description": "Plant a sunflower",
-    "region": "Sunflower",
+    "region": "Crop",
+    "requirements": [
+      {
+        "name": "Sunflowers",
+        "count": 1
+      }
+    ],
     "achievement": "PLANT_SUNFLOWER"
   },
   {
     "id": 12005,
     "name": "Cacti",
     "description": "Plant a cactus",
-    "region": "Cactus",
+    "region": "Crop",
+    "requirements": [
+      {
+        "name": "Cactus",
+        "count": 1
+      },
+      {
+        "name": "Pumpkins",
+        "count": 1
+      },
+      {
+        "name": "Carrot",
+        "count": 1
+      }
+    ],
     "achievement": "PLANT_CACTUS"
   },
   {
     "id": 12006,
     "name": "Trees",
     "description": "Plant a tree",
-    "region": "Loops",
+    "region": "Crop",
     "requirements": [
       {
         "name": "Trees",
@@ -335,7 +431,7 @@
     "id": 13000,
     "name": "Hay Fever",
     "description": "Farm 100 hay",
-    "region": "Start",
+    "region": "Hay",
     "statistic": {
       "key": "hay",
       "value": "100"
@@ -345,15 +441,15 @@
     "id": 13001,
     "name": "Hey, Farmer!",
     "description": "Farm 1K Hay",
-    "region": "Loops",
+    "region": "Hay",
     "requirements": [
+      {
+        "name": "Loop",
+        "count": 1
+      },
       {
         "name": "Grass",
         "count": 2
-      },
-      {
-        "name": "Megafarm",
-        "count": 1
       }
     ],
     "statistic": {
@@ -365,11 +461,23 @@
     "id": 13002,
     "name": "Cause I have farmed 10K Hay",
     "description": "Farm 10K hay",
-    "region": "EndGame",
+    "region": "Hay",
     "requirements": [
       {
         "name": "Grass",
         "count": 3
+      },
+      {
+        "name": "Megafarm",
+        "count": 1
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
+        "count": 1
       }
     ],
     "statistic": {
@@ -381,10 +489,22 @@
     "id": 13003,
     "name": "Hay Master",
     "description": "Farm 100K hay",
-    "region": "EndGame",
+    "region": "Hay",
     "requirements": [
       {
         "name": "Grass",
+        "count": 4
+      },
+      {
+        "name": "Megafarm",
+        "count": 2
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
         "count": 1
       }
     ],
@@ -395,12 +515,24 @@
   },
   {
     "id": 13004,
-    "name": "Hay Master",
+    "name": "1M Hay",
     "description": "Farm 1M hay",
-    "region": "EndGame",
+    "region": "Hay",
     "requirements": [
       {
         "name": "Grass",
+        "count": 6
+      },
+      {
+        "name": "Megafarm",
+        "count": 3
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
         "count": 1
       }
     ],
@@ -411,12 +543,52 @@
   },
   {
     "id": 13005,
-    "name": "Hay Master",
-    "description": "Farm 100M hay",
-    "region": "EndGame",
+    "name": "10M Hay",
+    "description": "Farm 10M hay",
+    "region": "Hay",
     "requirements": [
       {
         "name": "Grass",
+        "count": 7
+      },
+      {
+        "name": "Megafarm",
+        "count": 3
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
+        "count": 1
+      }
+    ],
+    "statistic": {
+      "key": "hay",
+      "value": "10M"
+    }
+  },
+  {
+    "id": 13006,
+    "name": "100M Hay",
+    "description": "Farm 100M hay",
+    "region": "Hay",
+    "requirements": [
+      {
+        "name": "Grass",
+        "count": 8
+      },
+      {
+        "name": "Megafarm",
+        "count": 4
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
         "count": 1
       }
     ],
@@ -426,13 +598,25 @@
     }
   },
   {
-    "id": 13006,
+    "id": 13007,
     "name": "Big Hay Farmer",
     "description": "Farm 1B hay",
-    "region": "EndGame",
+    "region": "Hay",
     "requirements": [
       {
         "name": "Grass",
+        "count": 10
+      },
+      {
+        "name": "Megafarm",
+        "count": 5
+      },
+      {
+        "name": "Loop",
+        "count": 1
+      },
+      {
+        "name": "Functions",
         "count": 1
       }
     ],
@@ -445,17 +629,7 @@
     "id": 15000,
     "name": "Must be a bunny",
     "description": "Farm 100 carrots",
-    "region": "Loops",
-    "requirements": [
-      {
-        "name": "Plant",
-        "count": 1
-      },
-      {
-        "name": "Carrot",
-        "count": 1
-      }
-    ],
+    "region": "Carrot",
     "statistic": {
       "key": "carrot",
       "value": "100"
@@ -465,18 +639,10 @@
     "id": 15001,
     "name": "Carrot Farmer",
     "description": "Farm 1K carrots",
-    "region": "Loops",
+    "region": "Carrot",
     "requirements": [
       {
         "name": "Expand",
-        "count": 1
-      },
-      {
-        "name": "Plant",
-        "count": 1
-      },
-      {
-        "name": "Carrot",
         "count": 1
       }
     ],
@@ -487,21 +653,41 @@
   },
   {
     "id": 15002,
-    "name": "Carrot Farmer",
-    "description": "Farm 100K carrots",
-    "region": "Loops",
+    "name": "10K carrots",
+    "description": "Farm 10K carrots",
+    "region": "Carrot",
     "requirements": [
       {
         "name": "Expand",
-        "count": 1
-      },
-      {
-        "name": "Plant",
-        "count": 1
+        "count": 2
       },
       {
         "name": "Carrot",
+        "count": 2
+      }
+    ],
+    "statistic": {
+      "key": "carrot",
+      "value": "10K"
+    }
+  },
+  {
+    "id": 15003,
+    "name": "100K Carrots",
+    "description": "Farm 100K carrots",
+    "region": "Carrot",
+    "requirements": [
+      {
+        "name": "Megafarm",
         "count": 1
+      },
+      {
+        "name": "Expand",
+        "count": 3
+      },
+      {
+        "name": "Carrot",
+        "count": 4
       }
     ],
     "statistic": {
@@ -510,24 +696,94 @@
     }
   },
   {
-    "id": 15003,
+    "id": 15004,
     "name": "All the carrots",
     "description": "Farm 1M carrots",
-    "region": "EndGame",
+    "region": "Carrot",
+    "requirements": [
+      {
+        "name": "Megafarm",
+        "count": 2
+      },
+      {
+        "name": "Expand",
+        "count": 4
+      },
+      {
+        "name": "Carrot",
+        "count": 6
+      }
+    ],
     "statistic": {
       "key": "carrots",
       "value": "1M"
     }
   },
   {
-    "id": 10041,
-    "name": "Orange you glad you're done with carrots?",
-    "description": "Farm 1B carrots",
-    "region": "EndGame",
+    "id": 15005,
+    "name": "10M Carrots",
+    "description": "Farm 10M carrots",
+    "region": "Carrot",
     "requirements": [
       {
+        "name": "Megafarm",
+        "count": 3
+      },
+      {
+        "name": "Expand",
+        "count": 4
+      },
+      {
         "name": "Carrot",
-        "count": 1
+        "count": 7
+      }
+    ],
+    "statistic": {
+      "key": "carrots",
+      "value": "10M"
+    }
+  },
+  {
+    "id": 15006,
+    "name": "100M Carrots",
+    "description": "Farm 100M carrots",
+    "region": "Carrot",
+    "requirements": [
+      {
+        "name": "Megafarm",
+        "count": 3
+      },
+      {
+        "name": "Expand",
+        "count": 5
+      },
+      {
+        "name": "Carrot",
+        "count": 8
+      }
+    ],
+    "statistic": {
+      "key": "carrots",
+      "value": "100M"
+    }
+  },
+  {
+    "id": 15007,
+    "name": "Orange you glad you're done with carrots?",
+    "description": "Farm 1B carrots",
+    "region": "Carrot",
+    "requirements": [
+      {
+        "name": "Megafarm",
+        "count": 5
+      },
+      {
+        "name": "Expand",
+        "count": 9
+      },
+      {
+        "name": "Carrot",
+        "count": 10
       }
     ],
     "statistic": {
@@ -539,13 +795,7 @@
     "id": 16000,
     "name": "100 Wood",
     "description": "Farm 100 wood",
-    "region": "Loops",
-    "requirements": [
-      {
-        "name": "Plant",
-        "count": 1
-      }
-    ],
+    "region": "Wood",
     "statistic": {
       "key": "wood",
       "value": "100"
@@ -555,18 +805,10 @@
     "id": 16001,
     "name": "Deforestation",
     "description": "Farm 1K Wood",
-    "region": "Loops",
+    "region": "Wood",
     "requirements": [
       {
         "name": "Expand",
-        "count": 1
-      },
-      {
-        "name": "Plant",
-        "count": 1
-      },
-      {
-        "name": "Trees",
         "count": 1
       }
     ],
@@ -579,15 +821,15 @@
     "id": 16002,
     "name": "10K Wood",
     "description": "Farm 10K Wood",
-    "region": "Loops",
+    "region": "Wood",
     "requirements": [
+      {
+        "name": "Megafarm",
+        "count": 1
+      },
       {
         "name": "Expand",
         "count": 2
-      },
-      {
-        "name": "Plant",
-        "count": 1
       },
       {
         "name": "Trees",
@@ -603,15 +845,15 @@
     "id": 16003,
     "name": "100K Wood",
     "description": "Farm 100K Wood",
-    "region": "Loops",
+    "region": "Wood",
     "requirements": [
       {
-        "name": "Expand",
+        "name": "Megafarm",
         "count": 2
       },
       {
-        "name": "Plant",
-        "count": 1
+        "name": "Expand",
+        "count": 3
       },
       {
         "name": "Trees",
@@ -627,15 +869,15 @@
     "id": 16004,
     "name": "1M Wood",
     "description": "Farm 1M Wood",
-    "region": "Loops",
+    "region": "Wood",
     "requirements": [
       {
-        "name": "Expand",
-        "count": 2
+        "name": "Megafarm",
+        "count": 3
       },
       {
-        "name": "Plant",
-        "count": 1
+        "name": "Expand",
+        "count": 5
       },
       {
         "name": "Trees",
@@ -651,15 +893,15 @@
     "id": 16005,
     "name": "100M Wood",
     "description": "Farm 100M Wood",
-    "region": "Loops",
+    "region": "Wood",
     "requirements": [
       {
-        "name": "Expand",
-        "count": 2
+        "name": "Megafarm",
+        "count": 4
       },
       {
-        "name": "Plant",
-        "count": 1
+        "name": "Expand",
+        "count": 7
       },
       {
         "name": "Trees",
@@ -675,8 +917,16 @@
     "id": 16006,
     "name": "Big Wood Farmer",
     "description": "Farm 1B wood",
-    "region": "EndGame",
+    "region": "Wood",
     "requirements": [
+      {
+        "name": "Megafarm",
+        "count": 5
+      },
+      {
+        "name": "Expand",
+        "count": 9
+      },
       {
         "name": "Trees",
         "count": 10
@@ -702,6 +952,16 @@
     "name": "Pumpkin Farmer",
     "description": "Farm 1K Pumpkins",
     "region": "Pumpkins",
+    "requirements": [
+      {
+        "name": "Expand",
+        "count": 3
+      },
+      {
+        "name": "Pumpkins",
+        "count": 2
+      }
+    ],
     "statistic": {
       "key": "pumpkin",
       "value": "1K"
@@ -711,11 +971,15 @@
     "id": 17002,
     "name": "Big Pumpkin Farmer",
     "description": "Farm 100M pumpkins",
-    "region": "EndGame",
+    "region": "Pumpkins",
     "requirements": [
       {
+        "name": "Expand",
+        "count": 4
+      },
+      {
         "name": "Pumpkins",
-        "count": 1
+        "count": 6
       }
     ],
     "statistic": {
@@ -754,7 +1018,7 @@
     "id": 18002,
     "name": "Over 9000!",
     "description": "Farm 9001 power",
-    "region": "Drones",
+    "region": "Sunflower",
     "requirements": [
       {
         "name": "Expand",
@@ -770,7 +1034,7 @@
     "id": 18003,
     "name": "Unlimited Power Farmer",
     "description": "Farm 100K Power",
-    "region": "EndGame",
+    "region": "Sunflower",
     "requirements": [
       {
         "name": "Expand",
@@ -872,13 +1136,45 @@
   },
   {
     "id": 21001,
-    "name": "Big Bone Farmer",
-    "description": "Farm",
-    "region": "EndGame",
+    "name": "10K Bones",
+    "description": "Farm 10K Bones",
+    "region": "Dinos",
     "requirements": [
       {
         "name": "Dinosaurs",
-        "count": 1
+        "count": 2
+      }
+    ],
+    "statistic": {
+      "key": "bone",
+      "value": "10K"
+    }
+  },
+  {
+    "id": 21002,
+    "name": "1M Bones",
+    "description": "Farm 1M Bones",
+    "region": "Dinos",
+    "requirements": [
+      {
+        "name": "Dinosaurs",
+        "count": 3
+      }
+    ],
+    "statistic": {
+      "key": "bone",
+      "value": "1M"
+    }
+  },
+  {
+    "id": 21003,
+    "name": "Big Bone Farmer",
+    "description": "Farm 100M Bones",
+    "region": "Dinos",
+    "requirements": [
+      {
+        "name": "Dinosaurs",
+        "count": 5
       }
     ],
     "statistic": {
@@ -890,13 +1186,7 @@
     "id": 22000,
     "name": "A bit weird",
     "description": "Farm 1 weird substance",
-    "region": "Loops",
-    "requirements": [
-      {
-        "name": "Fertilizer",
-        "count": 1
-      }
-    ],
+    "region": "WeirdSubstance",
     "statistic": {
       "key": "weird_substance",
       "value": "1"
@@ -906,13 +1196,7 @@
     "id": 22001,
     "name": "That's kinda weird",
     "description": "Farm 100 weird substance",
-    "region": "Loops",
-    "requirements": [
-      {
-        "name": "Fertilizer",
-        "count": 1
-      }
-    ],
+    "region": "WeirdSubstance",
     "statistic": {
       "key": "weird_substance",
       "value": "100"
@@ -922,20 +1206,64 @@
     "id": 22002,
     "name": "That's really weird",
     "description": "Farm 1K weird substance",
-    "region": "Loops",
+    "region": "WeirdSubstance",
     "requirements": [
       {
         "name": "Megafarm",
-        "count": 1
-      },
-      {
-        "name": "Fertilizer",
         "count": 1
       }
     ],
     "statistic": {
       "key": "weird_substance",
-      "value": "1000"
+      "value": "1K"
+    }
+  },
+  {
+    "id": 22003,
+    "name": "10K Weird Substance",
+    "description": "Farm 10K weird substance",
+    "region": "WeirdSubstance",
+    "requirements": [
+      {
+        "name": "Fertilizer",
+        "count": 2
+      },
+      {
+        "name": "Expand",
+        "count": 2
+      },
+      {
+        "name": "Megafarm",
+        "count": 2
+      }
+    ],
+    "statistic": {
+      "key": "weird_substance",
+      "value": "10K"
+    }
+  },
+  {
+    "id": 22004,
+    "name": "100K Weird Substance",
+    "description": "Farm 100K weird substance",
+    "region": "WeirdSubstance",
+    "requirements": [
+      {
+        "name": "Fertilizer",
+        "count": 3
+      },
+      {
+        "name": "Expand",
+        "count": 3
+      },
+      {
+        "name": "Megafarm",
+        "count": 3
+      }
+    ],
+    "statistic": {
+      "key": "weird_substance",
+      "value": "100K"
     }
   },
   {

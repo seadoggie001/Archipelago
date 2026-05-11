@@ -38,21 +38,21 @@
   {
     "id": 11007,
     "name": "Carrot",
-    "count": 1,
+    "count": 10,
     "classification": 1
   },
   {
     "id": 11008,
     "name": "Watering",
     "count": 1,
-    "classification": 1
+    "classification": 1,
+    "secondary_count": 8
   },
   {
     "id": 11009,
     "name": "Fertilizer",
-    "count": 1,
-    "classification": 1,
-    "secondary_count": 3
+    "count": 4,
+    "classification": 1
   },
   {
     "id": 11010,
@@ -82,13 +82,8 @@
   {
     "id": 11014,
     "name": "Pumpkins",
-    "count": 1,
+    "count": 10,
     "classification": 1
-  },
-  {
-    "id": 11015,
-    "name": "Pumpkins++",
-    "count": 9
   },
   {
     "id": 11016,
@@ -106,9 +101,8 @@
   {
     "id": 11018,
     "name": "Dinosaurs",
-    "count": 1,
-    "classification": 1,
-    "secondary_count": 5
+    "count": 6,
+    "classification": 1
   },
   {
     "id": 11019,
@@ -142,11 +136,6 @@
     "id": 11024,
     "name": "Simulation",
     "count": 1
-  },
-  {
-    "id": 11025,
-    "name": "Carrot++",
-    "count": 9
   },
   {
     "id": 11026,
@@ -203,21 +192,6 @@
     "id": 11035,
     "name": "Unlock",
     "count": 1
-  },
-  {
-    "id": 11036,
-    "name": "Grass++",
-    "count": 9
-  },
-  {
-    "id": 11037,
-    "name": "Trees++",
-    "count": 9
-  },
-  {
-    "id": 11038,
-    "name": "Watering++",
-    "count": 8
   },
   {
     "id": 12001,

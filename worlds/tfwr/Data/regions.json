@@ -3,82 +3,112 @@
     "name": "Start"
   },
   {
-    "name": "Loops",
+    "name": "Crop",
     "parent": "Start",
     "requirements": [
-      "Loop"
+      "Plant"
     ],
-    "entrance_name": "Start to Loops"
+    "entrance_name": "Start to Crop"
   },
   {
-    "name": "Cactus",
-    "parent": "Loops",
+    "name": "Flip",
+    "parent": "Start",
+    "entrance_name": "Start to Flip"
+  },
+  {
+    "name": "Hay",
+    "parent": "Start",
+    "entrance_name": "Start to Hay"
+  },
+  {
+    "name": "Wood",
+    "parent": "Crop",
     "requirements": [
-      "Cactus",
-      "Plant",
-      "Carrot",
-      "Operators"
+      "Trees"
     ],
-    "entrance_name": "Loops to Cactus"
+    "entrance_name": "Crop to Wood"
+  },
+  {
+    "name": "Carrot",
+    "parent": "Crop",
+    "requirements": [
+      "Carrot"
+    ],
+    "entrance_name": "Crop to Carrot"
+  },
+  {
+    "name": "WeirdSubstance",
+    "parent": "Crop",
+    "requirements": [
+      "Crops that can produce Weird Substance",
+      "Fertilizer"
+    ],
+    "entrance_name": "Crop to WeirdSubstance"
   },
   {
     "name": "Maze",
-    "parent": "Loops",
+    "parent": "WeirdSubstance",
     "requirements": [
+      "Loop",
       "Fertilizer",
-      "Mazes",
-      "Plant",
-      "Watering"
+      "Mazes"
     ],
-    "entrance_name": "Loops to Maze"
+    "entrance_name": "WeirdSubstance to Maze"
   },
   {
     "name": "Sunflower",
-    "parent": "Maze",
+    "parent": "Carrot",
     "requirements": [
+      "Loop",
       "Variables",
-      "Plant",
       "Sunflowers",
       "Operators"
     ],
-    "entrance_name": "Maze to Sunflower"
+    "entrance_name": "Carrot to Sunflower"
   },
   {
     "name": "Pumpkins",
-    "parent": "Loops",
+    "parent": "Carrot",
     "requirements": [
+      "Loop",
       "Pumpkins",
-      "Plant",
       "Carrot",
       "Variables"
     ],
-    "entrance_name": "Loops to Pumpkins"
+    "entrance_name": "Carrot to Pumpkins"
+  },
+  {
+    "name": "Cactus",
+    "parent": "Pumpkins",
+    "requirements": [
+      "Cactus",
+      "Operators"
+    ],
+    "entrance_name": "Pumpkins to Cactus"
   },
   {
     "name": "Drones",
-    "parent": "Sunflower",
+    "parent": "Start",
     "requirements": [
       "Megafarm",
       "Functions"
     ],
-    "entrance_name": "Sunflower to Drones"
+    "entrance_name": "Start to Drones"
   },
   {
     "name": "Dinos",
     "parent": "Cactus",
     "requirements": [
-      "Dinosaurs",
-      "Plant",
-      "Carrot"
+      "Dinosaurs"
     ],
     "entrance_name": "Cactus to Dinos"
   },
   {
     "name": "EndGame",
-    "parent": "Drones",
+    "parent": "Dinos",
     "requirements": [
       "Functions"
     ],
-    "entrance_name": "Drones to EndGame"
+    "entrance_name": "Dinos to EndGame"
   }
 ]
