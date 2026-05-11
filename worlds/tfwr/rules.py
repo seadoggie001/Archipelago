@@ -63,12 +63,23 @@ def resolve_rules(loc_requirements: list[Requirement | str]) -> Rule[TFWRWorld]:
                 case RuleNames.ReallyBigFarm:
                     rule &= Has(ItemNames.Expand, 9)
                 case RuleNames.CropsThatCanProduceWeirdSubstance:
+
+                    def find_location_by_id(number):
+                        for loc in ALL_LOCATION_DATA:
+                            if loc.id == number:
+                                return loc.name
+                        raise ValueError("Unexpected Location ID not found in data: " + number)
+
                     rule &= (
                             Has(ItemNames.Grass, 2)
-                            | Has(ItemNames.Carrot, 2)
-                            | Has(ItemNames.Trees)
-                            | Has(ItemNames.Cactus, 2)
-                            | Has(ItemNames.Pumpkins)
+                            # Carrots
+                            | (CanReachLocation(find_location_by_id(12002)) & Has(ItemNames.Carrot, 2))
+                            # Trees
+                            | CanReachLocation(find_location_by_id(12006))
+                            # Carrots
+                            | (CanReachLocation(find_location_by_id(12005)) & Has(ItemNames.Cactus, 2))
+                            # Pumpkins
+                            | CanReachLocation(find_location_by_id(12003))
                     )
                 case _:
                     # throw some error

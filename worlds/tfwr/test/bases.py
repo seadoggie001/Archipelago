@@ -1,6 +1,6 @@
 from BaseClasses import ItemClassification
 from test.bases import WorldTestBase
-from ..Data.Item import ALL_ITEM_DATA
+from ..Data.Item import ALL_ITEM_DATA, ItemNames
 from ..Data.Location import ALL_LOCATION_DATA
 from ..world import TFWRWorld
 
@@ -15,7 +15,7 @@ class TFWRTestBase(WorldTestBase):
 
     def test_too_many_items(self) -> None:
         with self.subTest("Too many items in the item pool"):
-            count:int = 0
+            count: int = 0
             for item in ALL_ITEM_DATA:
                 if item.classification == ItemClassification.progression:
                     count += item.count
@@ -46,3 +46,29 @@ class TFWRTestBase(WorldTestBase):
         with self.subTest("Tests that Gold Farmer is accessible"):
             self.assertAccessDependency(["Gold Farmer"], [["Loop", "Fertilizer", "Plant", "Watering", "Mazes"]],
                                         only_check_listed=True)
+
+    def test_healer_access(self) -> None:
+        with self.subTest("Tests that Healer is accessible"):
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer]],
+                                        only_check_listed=True)
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer, ItemNames.Grass]],
+                                        only_check_listed=True)
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer, ItemNames.Plant, ItemNames.Trees]],
+                                        only_check_listed=True)
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer, ItemNames.Plant, ItemNames.Carrot]],
+                                        only_check_listed=True)
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer, ItemNames.Plant, ItemNames.Carrot, ItemNames.Pumpkins]],
+                                        only_check_listed=True)
+            self.assertAccessDependency(["Healer"],
+                                        [[ItemNames.Fertilizer, ItemNames.Plant, ItemNames.Carrot, ItemNames.Pumpkins, ItemNames.Cactus]],
+                                        only_check_listed=True)
+    def test_prize_pumpkin_rule(self) -> None:
+        with self.subTest("Tests that Prize Pumpkin is accessible"):
+            for item in [ItemNames.Expand, ItemNames.Loop, ItemNames.Pumpkins, ItemNames.Carrot, ItemNames.Variables,
+                         ItemNames.Carrot, ItemNames.Plant]:
+                self.assertAccessDependency(["Prize Pumpkin"], [[item]], only_check_listed=True)
