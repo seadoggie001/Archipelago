@@ -476,7 +476,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="All the carrots",
         description="Farm 1M carrots",
         region=RegionNames.Carrot,
-        statistic=Statistic("carrots", "1M"),
+        statistic=Statistic("carrot", "1M"),
         requirements=[
             Requirement(ItemNames.Carrot, 6),
             Requirement(ItemNames.Expand, 4),
@@ -488,7 +488,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="10M Carrots",
         description="Farm 10M carrots",
         region=RegionNames.Carrot,
-        statistic=Statistic("carrots", "10M"),
+        statistic=Statistic("carrot", "10M"),
         requirements=[
             Requirement(ItemNames.Carrot, 7),
             Requirement(ItemNames.Expand, 4),
@@ -500,7 +500,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="100M Carrots",
         description="Farm 100M carrots",
         region=RegionNames.Carrot,
-        statistic=Statistic("carrots", "100M"),
+        statistic=Statistic("carrot", "100M"),
         requirements=[
             Requirement(ItemNames.Carrot, 8),
             Requirement(ItemNames.Expand, 5),
