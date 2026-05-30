@@ -50,13 +50,14 @@ class ItemNames:
     Dictionaries = "Dictionaries"
     Costs = "Costs"
     Unlock = "Unlock"
+    Rickroll = "Rickroll"
     ALL_UPGRADES: list[str] = [
         Loop, Drone_Speed, Hats, Grass, Expand, Plant, Carrot, Watering, Cactus, Fertilizer, Sunflowers,
         Mazes, TopHat, Trees, Pumpkins, Polyculture,
         Dinosaurs, Megafarm, TheFarmersRemains,
         Debug, MoreDebug, Timing, Simulation,
         Operators, Senses, Variables, Functions, Import, Utilities,
-        Lists, Dictionaries, Costs, Unlock
+        Lists, Dictionaries, Costs, Unlock, Rickroll
     ]
 
 
@@ -231,6 +232,11 @@ REGULAR_ITEM_DATA: list[ItemData] = [
         name=ItemNames.Unlock,
         classification=ItemClassification.filler
     ),
+    ItemData(
+        id=11036,
+        name=ItemNames.Rickroll,
+        classification=ItemClassification.trap
+    )
 ]
 
 ALL_ITEM_DATA: list[ItemData] = (
