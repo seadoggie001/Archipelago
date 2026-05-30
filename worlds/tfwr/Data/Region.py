@@ -71,17 +71,18 @@ ALL_REGION_DATA: list[RegionData] = [
     RegionData(
         name=RegionNames.Maze,
         parent=RegionNames.WeirdSubstance,
-        requirements=[ItemNames.Loop, ItemNames.Fertilizer, ItemNames.Mazes],
+        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Fertilizer, ItemNames.Mazes],
     ),
     RegionData(
         name=RegionNames.Sunflower,
         parent=RegionNames.Carrot,
-        requirements=[ItemNames.Loop, ItemNames.Variables, ItemNames.Sunflowers, ItemNames.Operators],
+        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Variables, ItemNames.Sunflowers,
+                      ItemNames.Operators],
     ),
     RegionData(
         name=RegionNames.Pumpkins,
         parent=RegionNames.Carrot,
-        requirements=[ItemNames.Loop, ItemNames.Pumpkins, ItemNames.Carrot, ItemNames.Variables],
+        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Pumpkins, ItemNames.Carrot, ItemNames.Variables],
     ),
     RegionData(
         name=RegionNames.Cactus,
