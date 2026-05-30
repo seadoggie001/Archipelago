@@ -7,10 +7,14 @@ class EasyMode(Toggle):
     """Enable easy mode for beginners. This actually does nothing so far."""
     display_name = "Easy Mode"
 
+class EarlyRiser(Toggle):
+    """Require plant to be located early. Makes starting faster"""
+    display_name = "Early Riser"
 
 @dataclass
 class TFWROptions(PerGameCommonOptions):
     easy_mode: EasyMode
+    early_riser: EarlyRiser
 
 
 option_groups = [

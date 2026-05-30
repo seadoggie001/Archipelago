@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
+
 from BaseClasses import Item, ItemClassification
-from .Data.Item import ALL_ITEM_DATA, FILLER_ITEM_DATA, REGULAR_ITEM_DATA
+from .Data.Item import ALL_ITEM_DATA, FILLER_ITEM_DATA, REGULAR_ITEM_DATA, ItemNames
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -42,6 +43,10 @@ def create_item_with_correct_classification(world: TFWRWorld, name: str,
 
 
 def create_all_items(world: TFWRWorld) -> None:
+
+    if world.options.early_riser:
+        world.multiworld.local_early_items[world.player][ItemNames.Plant] = 1
+
     item_pool: list[TFWRItem] = []
     # Create every upgrade item
     for item in REGULAR_ITEM_DATA:
