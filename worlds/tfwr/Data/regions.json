@@ -49,6 +49,7 @@
     "name": "Maze",
     "parent": "WeirdSubstance",
     "requirements": [
+      "Drone Speed",
       "Loop",
       "Fertilizer",
       "Mazes"
@@ -59,6 +60,7 @@
     "name": "Sunflower",
     "parent": "Carrot",
     "requirements": [
+      "Drone Speed",
       "Loop",
       "Variables",
       "Sunflowers",
@@ -70,6 +72,7 @@
     "name": "Pumpkins",
     "parent": "Carrot",
     "requirements": [
+      "Drone Speed",
       "Loop",
       "Pumpkins",
       "Carrot",
@@ -99,7 +102,11 @@
     "name": "Dinos",
     "parent": "Cactus",
     "requirements": [
-      "Dinosaurs"
+      "Dinosaurs",
+      {
+        "name": "Expand",
+        "count": 2
+      }
     ],
     "entrance_name": "Cactus to Dinos"
   },
@@ -110,5 +117,10 @@
       "Functions"
     ],
     "entrance_name": "Dinos to EndGame"
+  },
+  {
+    "name": "GrassSanity",
+    "parent": "Start",
+    "entrance_name": "Start to GrassSanity"
   }
 ]
