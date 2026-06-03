@@ -195,6 +195,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Get a dinosaur to length 1K",
         region=RegionNames.Dinos,
         achievement="SIZE_MATTERS",
+        requirements=[Requirement(ItemNames.Expand, 9)],
     ),
     LocationData(
         10021,
@@ -438,7 +439,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "1K"),
         requirements=[
-            ItemNames.Expand
+            ItemNames.Expand,
+            Requirement(ItemNames.Expand, 2),
         ],
     ),
     LocationData(
@@ -448,8 +450,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "10K"),
         requirements=[
-            Requirement(ItemNames.Carrot, 2),
-            Requirement(ItemNames.Expand, 2),
+            Requirement(ItemNames.Carrot, 4),
+            Requirement(ItemNames.Expand, 4),
         ],
     ),
     LocationData(
@@ -459,9 +461,10 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "100K"),
         requirements=[
-            Requirement(ItemNames.Carrot, 4),
-            Requirement(ItemNames.Expand, 3),
+            Requirement(ItemNames.Carrot, 5),
+            Requirement(ItemNames.Expand, 5),
             ItemNames.Megafarm,
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -472,8 +475,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Carrot, "1M"),
         requirements=[
             Requirement(ItemNames.Carrot, 6),
-            Requirement(ItemNames.Expand, 4),
+            Requirement(ItemNames.Expand, 6),
             Requirement(ItemNames.Megafarm, 2),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -484,8 +488,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Carrot, "10M"),
         requirements=[
             Requirement(ItemNames.Carrot, 7),
-            Requirement(ItemNames.Expand, 4),
+            Requirement(ItemNames.Expand, 7),
             Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -496,8 +501,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Carrot, "100M"),
         requirements=[
             Requirement(ItemNames.Carrot, 8),
-            Requirement(ItemNames.Expand, 5),
+            Requirement(ItemNames.Expand, 8),
             Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -510,6 +516,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Carrot, 10),
             Requirement(ItemNames.Expand, 9),
             Requirement(ItemNames.Megafarm, 5),
+            ItemNames.Functions,
         ],
     ),
     # endregion
@@ -539,6 +546,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 2),
             Requirement(ItemNames.Expand, 2),
             Requirement(ItemNames.Megafarm, 1),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -551,6 +559,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 3),
             Requirement(ItemNames.Expand, 3),
             Requirement(ItemNames.Megafarm, 2),
+ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -563,6 +572,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 5),
             Requirement(ItemNames.Expand, 5),
             Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -575,6 +585,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 6),
             Requirement(ItemNames.Expand, 6),
             Requirement(ItemNames.Megafarm, 3),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -587,6 +598,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 8),
             Requirement(ItemNames.Expand, 7),
             Requirement(ItemNames.Megafarm, 4),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -599,6 +611,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Trees, 10),
             Requirement(ItemNames.Expand, 9),
             Requirement(ItemNames.Megafarm, 5),
+            ItemNames.Functions,
         ],
     ),
     # endregion
@@ -628,7 +641,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Pumpkins,
         statistic=Statistic(Resources.Pumpkin, "10K"),
         requirements=[
-            Requirement(ItemNames.Pumpkins, 2),
+            Requirement(ItemNames.Pumpkins, 3),
             Requirement(ItemNames.Expand, 3),
         ],
     ),
@@ -639,7 +652,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Pumpkins,
         statistic=Statistic(Resources.Pumpkin, "100K"),
         requirements=[
-            Requirement(ItemNames.Pumpkins, 2),
+            Requirement(ItemNames.Pumpkins, 4),
             Requirement(ItemNames.Expand, 3),
         ],
     ),
@@ -650,7 +663,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Pumpkins,
         statistic=Statistic(Resources.Pumpkin, "1M"),
         requirements=[
-            Requirement(ItemNames.Pumpkins, 2),
+            Requirement(ItemNames.Pumpkins, 5),
             Requirement(ItemNames.Expand, 3),
         ],
     ),
@@ -712,22 +725,27 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="A Little Pokey",
         description="Farm 100 cacti",
         region=RegionNames.Cactus,
-        statistic=Statistic(Resources.Cactus, "100"),
-        requirements=[ItemNames.Plant]
+        statistic=Statistic(Resources.Cactus, "100")
     ),
     LocationData(
         19001,
         name="Can't touch this (ow!)",
         description="Farm 1K Cacti",
         region=RegionNames.Cactus,
-        statistic=Statistic(Resources.Cactus, "1K")
+        statistic=Statistic(Resources.Cactus, "1K"),
+        requirements=[
+            Requirement(ItemNames.Expand, 2),
+        ]
     ),
     LocationData(
         19002,
         name="10K Cacti",
         description="Farm 10K Cacti",
         region=RegionNames.Cactus,
-        statistic=Statistic(Resources.Cactus, "10K")
+        statistic=Statistic(Resources.Cactus, "10K"),
+        requirements=[
+            Requirement(ItemNames.Expand, 3),
+        ]
     ),
     LocationData(
         19003,
@@ -735,7 +753,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 100K cacti",
         region=RegionNames.Cactus,
         statistic=Statistic(Resources.Cactus, "100K"),
-        requirements=[ItemNames.Plant]
+        requirements=[
+            Requirement(ItemNames.Expand, 5),
+        ]
     ),
     LocationData(
         19004,
@@ -743,7 +763,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 1M cacti",
         region=RegionNames.EndGame,
         statistic=Statistic(Resources.Cactus, "1M"),
-        requirements=[ItemNames.Cactus]
+        requirements=[
+            Requirement(ItemNames.Expand, 6),
+        ]
     ),
     # endregion
     # region 20Ks Gold
@@ -786,8 +808,12 @@ ALL_LOCATION_DATA: list[LocationData] = [
         20005,
         name="Going for Gold",
         description="Farm 100M gold",
-        region=RegionNames.EndGame,
-        statistic=Statistic(Resources.Gold, "100M")),
+        region=RegionNames.Maze,
+        statistic=Statistic(Resources.Gold, "100M"),
+        requirements=[
+
+        ]
+    ),
     # endregion
     # region 21Ks Bones
     LocationData(
@@ -818,7 +844,10 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 100K Bones",
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "100K"),
-        requirements=[Requirement(ItemNames.Dinosaurs, 2)],
+        requirements=[
+            Requirement(ItemNames.Dinosaurs, 3),
+            Requirement(ItemNames.Expand, 5),
+        ],
     ),
     LocationData(
         21004,
@@ -826,7 +855,10 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 1M Bones",
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "1M"),
-        requirements=[Requirement(ItemNames.Dinosaurs, 3)],
+        requirements=[
+            Requirement(ItemNames.Dinosaurs, 4),
+            Requirement(ItemNames.Expand, 6),
+        ],
     ),
     LocationData(
         21005,
@@ -834,7 +866,10 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 100M Bones",
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "100M"),
-        requirements=[Requirement(ItemNames.Dinosaurs, 5)],
+        requirements=[
+            Requirement(ItemNames.Dinosaurs, 5),
+            Requirement(ItemNames.Expand, 8),
+        ],
     ),
     # endregion
     # region 22Ks Weird Substance
@@ -858,7 +893,11 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 1K weird substance",
         region=RegionNames.WeirdSubstance,
         statistic=Statistic(Resources.Weird_Substance, "1K"),
-        requirements=[ItemNames.Megafarm],
+        requirements=[
+            ItemNames.Megafarm,
+            ItemNames.Functions,
+            Requirement(ItemNames.Fertilizer, 2),
+        ],
     ),
     LocationData(
         22003,
@@ -870,6 +909,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Megafarm, 2),
             Requirement(ItemNames.Expand, 2),
             Requirement(ItemNames.Fertilizer, 2),
+            ItemNames.Functions,
         ],
     ),
     LocationData(
@@ -882,6 +922,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
             Requirement(ItemNames.Megafarm, 3),
             Requirement(ItemNames.Expand, 3),
             Requirement(ItemNames.Fertilizer, 3),
+            ItemNames.Functions,
         ],
     ),
     # endregion
