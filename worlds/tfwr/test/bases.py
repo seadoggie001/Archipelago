@@ -2,6 +2,7 @@ from BaseClasses import ItemClassification
 from test.bases import WorldTestBase
 from ..Data.Item import ALL_ITEM_DATA, ItemNames
 from ..Data.Location import ALL_LOCATION_DATA
+from ..Data.Region import RegionNames, ALL_REGION_DATA
 from ..Data.Resources import Resources
 from ..world import TFWRWorld
 
@@ -137,3 +138,10 @@ class TFWRTestBase(WorldTestBase):
                     unique.add(item.id)
             self.assertTrue(len(duplicates) == 0, "Duplicate item ids: " + str(duplicates))
 
+    def test_for_all_regions(self) -> None:
+        with self.subTest("Tests there are no regions missing"):
+            for i in ALL_REGION_DATA:
+                if i.name in RegionNames.Regions:
+                    pass
+                else:
+                    self.assertTrue(False, "Region " + i.name + " is missing")

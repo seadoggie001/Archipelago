@@ -34,6 +34,50 @@ class LocationData:
     '''Statistic used to determine how the location is granted. Should be unused here.'''
     timed: TimedStatistic | None = None
     '''A Statistic that must be completed in a set amount of time'''
+    option: str | None = None
+
+class Options:
+    GrassSanity="Grass Sanity"
+
+
+def add_grass_sanity() -> list[LocationData]:
+    i:int = 23000
+    locs:list[LocationData] = []
+    for x in range(0, 32):
+        for y in range(0, 32):
+            loc = LocationData(
+                i,
+                name=f"Grass ({x}, {y})",
+                description=f"Harvest hay at ({x}, {y})",
+                region=RegionNames.Grass,
+                option=Options.GrassSanity,
+            )
+            locs.append(add_requirements(loc, x, y))
+            i += 1
+    return locs
+
+def add_requirements(loc: LocationData, x:int, y:int) -> LocationData:
+    if x == 0 and y == 0:
+        pass
+    elif x == 0 and y < 3:
+        loc.requirements = [ItemNames.Expand]
+    elif x < 3 and y < 3:
+        loc.requirements = [Requirement(ItemNames.Expand, 2)]
+    elif x < 4 and y < 4:
+        loc.requirements = [Requirement(ItemNames.Expand, 3)]
+    elif x < 6 and y < 6:
+        loc.requirements = [Requirement(ItemNames.Expand, 4)]
+    elif x < 8 and y < 8:
+        loc.requirements = [Requirement(ItemNames.Expand, 5)]
+    elif x < 12 and y < 12:
+        loc.requirements = [Requirement(ItemNames.Expand, 6)]
+    elif x < 16 and y < 16:
+        loc.requirements = [Requirement(ItemNames.Expand, 7)]
+    elif x < 22 and y < 22:
+        loc.requirements = [Requirement(ItemNames.Expand, 8)]
+    else:
+        loc.requirements = [Requirement(ItemNames.Expand, 9)]
+    return loc
 
 
 # Location identifiers start at 10K and are grouped by categories into their own 1K ids. "Categories" are not regions.
@@ -926,6 +970,9 @@ ItemNames.Functions,
         ],
     ),
     # endregion
+    #region 23Ks Grass Sanity
+
+    #endregion
     # region 99Ks Timing
     LocationData(
         99000,
@@ -976,5 +1023,5 @@ ItemNames.Functions,
         requirements=[ItemNames.Trees]
     ),
     # endregion
-]
+] + add_grass_sanity()
 """All location data including names, descriptions, regions, and rules."""

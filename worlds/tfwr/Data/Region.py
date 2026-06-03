@@ -19,8 +19,9 @@ class RegionNames:
     Drones = "Drones"
     Dinos = "Dinos"
     EndGame = "EndGame"
+    Grass = "GrassSanity"
     Regions: list[str] = [Start, Crop, Flip, Hay, Wood, Carrot, Sunflower, Cactus, WeirdSubstance, Maze, Pumpkins,
-                          Drones, Dinos, EndGame]
+                          Drones, Dinos, EndGame, Grass]
 
 
 @dataclass
@@ -97,11 +98,18 @@ ALL_REGION_DATA: list[RegionData] = [
     RegionData(
         name=RegionNames.Dinos,
         parent=RegionNames.Cactus,
-        requirements=[ItemNames.Dinosaurs],
+        requirements=[
+            ItemNames.Dinosaurs,
+            Requirement(ItemNames.Expand, 2),
+        ],
     ),
     RegionData(
         name=RegionNames.EndGame,
         parent=RegionNames.Dinos,
         requirements=[ItemNames.Functions],
     ),
+    RegionData(
+        name=RegionNames.Grass,
+        parent=RegionNames.Start,
+    )
 ]
