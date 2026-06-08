@@ -1,29 +1,39 @@
 from dataclasses import dataclass
 
-from Options import OptionGroup, PerGameCommonOptions, Toggle
+from Options import OptionGroup, PerGameCommonOptions, Toggle, Choice
 from .Data.Location import Options
 
 class EasyMode(Toggle):
-    """Enable easy mode for beginners. This actually does nothing so far."""
+    """Enabled """
     display_name = "Easy Mode"
 
 
+class Goal(Choice):
+    """Select how the game will end"""
+    display_name = "Goal"
+
+    option_gold = 0
+    """Collect 1K gold"""
+
+    option_dinosaur_tail = 1
+    """Create a dinosaur with a length of 1K"""
+
 class EarlyRiser(Toggle):
-    """Require plant to be located early. Makes starting faster"""
+    """Require `plant` to be located early. Makes starting faster"""
     display_name = "Early Riser"
 
 
 class GrassSanity(Toggle):
-    """Plant grass on each square of the farm"""
+    """Adds a check to each square of the farm. Harvest grass there to complete the check."""
     display_name = "Grass Sanity"
     default = False
 
 
 @dataclass
 class TFWROptions(PerGameCommonOptions):
-    easy_mode: EasyMode
     early_riser: EarlyRiser
     grass_sanity: GrassSanity
+    goal: Goal
 
 
 def valid_options(options: TFWROptions, option: str | None) -> bool:
@@ -40,7 +50,14 @@ def valid_options(options: TFWROptions, option: str | None) -> bool:
 option_groups = [
     OptionGroup(
         "General",
-        [EasyMode],
+        [
+            Goal,
+            EarlyRiser,
+        ],
+    ),
+    OptionGroup(
+        "Sanity",
+        [GrassSanity],
     )
 ]
 

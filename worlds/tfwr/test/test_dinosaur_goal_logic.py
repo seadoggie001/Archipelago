@@ -6,11 +6,11 @@ from .bases import TFWRTestBase
 from ..Data.Region import RegionNames
 
 
-class TestHardModeLogic(TFWRTestBase):
-    """I'm really just copying APQuest for now"""
+class TestDinosaurGoalLogic(TFWRTestBase):
+    """Tests that the dinosaur goal logic works correctly"""
 
     options = {
-        "easy_mode": 0,
+        "goal": 1,
         "grass_sanity": 0,
     }
 

@@ -8,7 +8,7 @@ from .Data.Item import ItemNames
 from .Data.Location import ALL_LOCATION_DATA
 from .Data.Region import ALL_REGION_DATA
 from .Data.Rules import RuleNames, Requirement
-from .options import EasyMode, valid_options
+from .options import valid_options, Goal
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -91,6 +91,6 @@ def resolve_rules(loc_requirements: list[Requirement | str]) -> Rule[TFWRWorld]:
 def set_completion_condition(world: TFWRWorld) -> None:
     """How do you win?"""
     world.set_completion_rule(
-        CanReachLocation("Gold Farmer", options=[OptionFilter(EasyMode, True)])
-        | CanReachLocation("Size Matters", options=[OptionFilter(EasyMode, False)])
+        CanReachLocation("Gold Farmer", options=[OptionFilter(Goal, Goal.option_gold)])
+        | CanReachLocation("Size Matters", options=[OptionFilter(Goal, Goal.option_dinosaur_tail)])
     )
