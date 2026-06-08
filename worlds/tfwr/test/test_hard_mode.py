@@ -10,7 +10,8 @@ class TestHardModeLogic(TFWRTestBase):
     """I'm really just copying APQuest for now"""
 
     options = {
-        "easy_mode": False,
+        "easy_mode": 0,
+        "grass_sanity": 0,
     }
 
     run_default_tests = False
@@ -40,3 +41,8 @@ class TestHardModeLogic(TFWRTestBase):
                                         folder + region + "_Hard.puml",
                                         regions_to_highlight=state.reachable_regions[self.player],
                                         )
+
+        with self.subTest("Tests that Grass sanity is missing"):
+            grass_region = self.world.get_region(RegionNames.Grass)
+            loc_count = len(grass_region.locations)
+            self.assertEqual(loc_count, 0, "Grass sanity locations should be missing")

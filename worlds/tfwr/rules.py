@@ -8,7 +8,7 @@ from .Data.Item import ItemNames
 from .Data.Location import ALL_LOCATION_DATA
 from .Data.Region import ALL_REGION_DATA
 from .Data.Rules import RuleNames, Requirement
-from .options import EasyMode
+from .options import EasyMode, valid_options
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -32,7 +32,7 @@ def set_all_entrance_rules(world: TFWRWorld) -> None:
 
 def set_all_location_rules(world: TFWRWorld) -> None:
     for location_data in ALL_LOCATION_DATA:
-        if location_data.requirements is not None:
+        if location_data.requirements is not None and valid_options(world.options, location_data.option):
             location = world.get_location(location_data.name)
             world.set_rule(location, resolve_rules(location_data.requirements))
 

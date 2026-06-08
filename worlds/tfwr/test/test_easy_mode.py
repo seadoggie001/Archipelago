@@ -11,6 +11,7 @@ class TestEasyModeLogic(TFWRTestBase):
 
     options = {
         "easy_mode": True,
+        "grass_sanity": True,
     }
 
     run_default_tests = False
@@ -40,3 +41,8 @@ class TestEasyModeLogic(TFWRTestBase):
                                         folder + region + "_Easy.puml",
                                         regions_to_highlight=state.reachable_regions[self.player],
                                         )
+
+        with self.subTest("Tests that Grass sanity is included"):
+            grass_region = self.world.get_region(RegionNames.Grass)
+            loc_count = len(grass_region.locations)
+            self.assertGreater(loc_count, 1, "Grass sanity locations should be included")

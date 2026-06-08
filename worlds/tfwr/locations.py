@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from BaseClasses import Location, Region
 from .Data.Location import ALL_LOCATION_DATA, LocationData
+from .options import valid_options
 from .Data.Region import RegionNames
 
 if TYPE_CHECKING:
@@ -38,11 +38,10 @@ def create_achieve_locations(world: TFWRWorld) -> None:
         region: Region = world.get_region(regionName)
         # Get all locations with a matching region
         locations = get_location_names_with_ids(
-            [location.name for location in ALL_LOCATIONS if location.region == regionName]
+            [location.name for location in ALL_LOCATIONS if location.region == regionName and valid_options(world.options, location.option)]
         )
         # add the locations to the region
         region.add_locations(locations, TFWRLocation)
-
 
 def create_events(world: TFWRWorld) -> None:
     # This is used to create a location that acts as an event trigger
