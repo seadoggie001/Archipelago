@@ -3,10 +3,6 @@ from dataclasses import dataclass
 from Options import OptionGroup, PerGameCommonOptions, Toggle, Choice
 from .Data.Location import Options
 
-class EasyMode(Toggle):
-    """Enabled """
-    display_name = "Easy Mode"
-
 
 class Goal(Choice):
     """Select how the game will end"""
@@ -62,10 +58,5 @@ option_groups = [
 ]
 
 option_presets = {
-    "Easy Mode": {
-        "easy_mode": True,
-    },
-    "Hard Mode": {
-        "easy_mode": False,
-    },
+
 }
