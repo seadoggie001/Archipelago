@@ -788,7 +788,7 @@ ItemNames.Functions,
         region=RegionNames.Cactus,
         statistic=Statistic(Resources.Cactus, "10K"),
         requirements=[
-            Requirement(ItemNames.Expand, 3),
+            Requirement(ItemNames.Expand, 4),
         ]
     ),
     LocationData(
@@ -825,28 +825,40 @@ ItemNames.Functions,
         name="Gold Farmer",
         description="Farm 1K Gold",
         region=RegionNames.Maze,
-        statistic=Statistic(Resources.Gold, "1K")
+        statistic=Statistic(Resources.Gold, "1K"),
+        requirements=[
+            ItemNames.Senses
+        ]
     ),
     LocationData(
         20002,
         name="Raking in the Gold",
         description="Farm 10K Gold",
         region=RegionNames.Maze,
-        statistic=Statistic(Resources.Gold, "10K")
+        statistic=Statistic(Resources.Gold, "10K"),
+        requirements=[
+            ItemNames.Senses
+        ]
     ),
     LocationData(
         20003,
         name="All that Glitters",
         description="Farm 100K Gold",
         region=RegionNames.Maze,
-        statistic=Statistic(Resources.Gold, "100K")
+        statistic=Statistic(Resources.Gold, "100K"),
+        requirements=[
+            ItemNames.Senses
+        ]
     ),
     LocationData(
         20004,
         name="Gold Mine",
         description="Farm 1M Gold",
         region=RegionNames.Maze,
-        statistic=Statistic(Resources.Gold, "1M")
+        statistic=Statistic(Resources.Gold, "1M"),
+        requirements=[
+            ItemNames.Senses
+        ]
     ),
     LocationData(
         20005,
@@ -855,7 +867,7 @@ ItemNames.Functions,
         region=RegionNames.Maze,
         statistic=Statistic(Resources.Gold, "100M"),
         requirements=[
-
+            ItemNames.Senses
         ]
     ),
     # endregion

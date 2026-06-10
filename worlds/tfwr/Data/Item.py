@@ -193,8 +193,6 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11027,
         name=ItemNames.Senses,
-        count=1,
-        classification=ItemClassification.filler
     ),
     ItemData(
         id=11028,
