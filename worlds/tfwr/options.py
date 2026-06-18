@@ -25,15 +25,21 @@ class GrassSanity(Toggle):
     default = False
 
 
+class CropCost(Toggle):
+    display_name = "Randomized Crop Cost"
+    default = False
+
+
 @dataclass
 class TFWROptions(PerGameCommonOptions):
     early_riser: EarlyRiser
     grass_sanity: GrassSanity
     goal: Goal
+    crop_cost: CropCost
 
 
 def valid_options(options: TFWROptions, option: str | None) -> bool:
-    """Checks if the options on a Location are currently valid for this world"""
+    """Checks if a Location should be included in the world"""
     if option == Options.GrassSanity:
         return options.grass_sanity.value == 1
     elif option == "":

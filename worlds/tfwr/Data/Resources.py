@@ -1,5 +1,6 @@
 
 class Resources:
+    Flips = "flips"
     Hay = "hay"
     Wood = "wood"
     Carrot = "carrot"
