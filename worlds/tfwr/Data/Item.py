@@ -123,7 +123,7 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11011,
         name=ItemNames.Mazes,
-        secondary_count=5
+        count=5
     ),
     ItemData(
         id=11012,

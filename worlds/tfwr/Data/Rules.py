@@ -9,7 +9,9 @@ class RuleNames:
     """the player has all of the expansions"""
     CropsThatCanProduceWeirdSubstance = "Crops that can produce Weird Substance"
     """the player has a crop that produces multiple items"""
-    Rules: list[str] = [AnyHatItems, ReallyBigFarm, CropsThatCanProduceWeirdSubstance]
+    MaxedOutFarm = "Maxed out farm"
+    """the player has the largest farm, all drones, and all speed"""
+    Rules: list[str] = [AnyHatItems, ReallyBigFarm, CropsThatCanProduceWeirdSubstance, MaxedOutFarm]
 
 
 @dataclasses.dataclass

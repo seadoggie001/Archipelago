@@ -99,15 +99,20 @@ def resolve_rules(loc_requirements: list[Requirement | str]) -> Rule[TFWRWorld]:
 
                     rule &= (
                             Has(ItemNames.Grass, 2)
-                            # Carrots
+                            # Plant Carrots
                             | (CanReachLocation(find_location_by_id(12002)) & Has(ItemNames.Carrot, 2))
-                            # Trees
+                            # Plant Trees
                             | CanReachLocation(find_location_by_id(12006))
-                            # Carrots
+                            # Plant Carrots
                             | (CanReachLocation(find_location_by_id(12005)) & Has(ItemNames.Cactus, 2))
-                            # Pumpkins
+                            # Plant Pumpkins
                             | CanReachLocation(find_location_by_id(12003))
                     )
+                case RuleNames.MaxedOutFarm:
+                    rule &= Has(ItemNames.Expand, 9)
+                    rule &= Has(ItemNames.Drone_Speed, 5)
+                    rule &= Has(ItemNames.Megafarm, 5)
+                    rule &= Has(ItemNames.Functions)
                 case _:
                     # throw some error
                     raise ValueError(

@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+from .Resources import Resources
 from .Rules import RuleNames, Requirement
-from ..Data.Item import ItemNames
+from .Item import ItemNames
 
 
 class RegionNames:
@@ -18,10 +19,9 @@ class RegionNames:
     Pumpkins = "Pumpkins"
     Drones = "Drones"
     Dinos = "Dinos"
-    EndGame = "EndGame"
     Grass = "GrassSanity"
     Regions: list[str] = [Start, Crop, Flip, Hay, Wood, Carrot, Sunflower, Cactus, WeirdSubstance, Maze, Pumpkins,
-                          Drones, Dinos, EndGame, Grass]
+                          Drones, Dinos, Grass]
 
 
 @dataclass
@@ -29,6 +29,7 @@ class RegionData:
     name: str
     parent: str = None
     requirements: list[str | Requirement] | None = None
+    resource: str = None
     entrance_name: str = ""
 
     def __post_init__(self):
@@ -53,60 +54,87 @@ ALL_REGION_DATA: list[RegionData] = [
     RegionData(
         name=RegionNames.Hay,
         parent=RegionNames.Start,
+        resource=Resources.Hay,
     ),
     RegionData(
         name=RegionNames.Wood,
         parent=RegionNames.Crop,
-        requirements=[ItemNames.Trees],
+        resource=Resources.Wood,
     ),
     RegionData(
         name=RegionNames.Carrot,
         parent=RegionNames.Crop,
         requirements=[ItemNames.Carrot],
+        resource=Resources.Carrot,
     ),
     RegionData(
         name=RegionNames.WeirdSubstance,
         parent=RegionNames.Crop,
-        requirements=[RuleNames.CropsThatCanProduceWeirdSubstance, ItemNames.Fertilizer],
+        requirements=[
+            RuleNames.CropsThatCanProduceWeirdSubstance,
+            ItemNames.Fertilizer
+        ],
     ),
     RegionData(
         name=RegionNames.Maze,
-        parent=RegionNames.WeirdSubstance,
-        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Fertilizer, ItemNames.Mazes],
+        parent=RegionNames.Crop,
+        requirements=[
+            ItemNames.Drone_Speed,
+            ItemNames.Loop,
+            ItemNames.Fertilizer,
+            ItemNames.Mazes
+        ],
     ),
     RegionData(
         name=RegionNames.Sunflower,
-        parent=RegionNames.Carrot,
-        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Variables, ItemNames.Sunflowers,
-                      ItemNames.Operators],
+        parent=RegionNames.Crop,
+        requirements=[
+            ItemNames.Drone_Speed,
+            ItemNames.Loop,
+            ItemNames.Variables,
+            ItemNames.Sunflowers,
+            ItemNames.Operators
+        ],
     ),
     RegionData(
         name=RegionNames.Pumpkins,
-        parent=RegionNames.Carrot,
-        requirements=[ItemNames.Drone_Speed, ItemNames.Loop, ItemNames.Pumpkins, ItemNames.Carrot, ItemNames.Variables],
+        parent=RegionNames.Crop,
+        requirements=[
+            ItemNames.Drone_Speed,
+            ItemNames.Loop,
+            ItemNames.Pumpkins,
+            ItemNames.Carrot,
+            ItemNames.Variables
+        ],
+        resource=Resources.Pumpkin,
     ),
     RegionData(
         name=RegionNames.Cactus,
-        parent=RegionNames.Pumpkins,
-        requirements=[ItemNames.Cactus, ItemNames.Operators],
+        parent=RegionNames.Crop,
+        requirements=[
+            ItemNames.Drone_Speed,
+            ItemNames.Cactus,
+            ItemNames.Operators,
+            ItemNames.Variables
+        ],
+        resource=Resources.Cactus,
     ),
     RegionData(
         name=RegionNames.Drones,
-        parent=RegionNames.Start,
-        requirements=[ItemNames.Megafarm, ItemNames.Functions],
+        parent=RegionNames.Crop,
+        requirements=[
+            ItemNames.Megafarm,
+            ItemNames.Functions
+        ],
     ),
     RegionData(
         name=RegionNames.Dinos,
-        parent=RegionNames.Cactus,
+        parent=RegionNames.Crop,
         requirements=[
             ItemNames.Dinosaurs,
             Requirement(ItemNames.Expand, 2),
         ],
-    ),
-    RegionData(
-        name=RegionNames.EndGame,
-        parent=RegionNames.Dinos,
-        requirements=[ItemNames.Functions],
+        resource=Resources.Bone,
     ),
     RegionData(
         name=RegionNames.Grass,

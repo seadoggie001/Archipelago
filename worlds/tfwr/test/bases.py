@@ -85,19 +85,19 @@ class TFWRTestBase(WorldTestBase):
                             None) is not None
 
             for crop in [Resources.Wood, Resources.Hay, Resources.Carrot]:
-                for number in ["100", "1K", "10K", "100K", "1M", "100M", "1B"]:
+                for number in ["10", "100", "1K", "10K", "100K", "1M", "10M", "100M", "1B"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
             for crop in [Resources.Gold, Resources.Bone, Resources.Pumpkin]:
-                for number in ["100", "1K", "10K", "100K", "1M", "100M"]:
+                for number in ["10", "100", "1K", "10K", "100K", "1M", "10M", "100M"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
             for crop in [Resources.Cactus]:
-                for number in ["100", "1K", "10K", "100K"]:
+                for number in ["10", "100", "1K", "10K", "100K"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
             for crop in [Resources.Power]:
-                for number in ["100", "1K", "9001", "100K"]:
+                for number in ["10", "100", "1K", "9001", "100K"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
             for crop in [Resources.Weird_Substance]:
-                for number in ["100", "1K", "10K", "100K"]:
+                for number in ["10", "100", "1K", "10K", "100K"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
 
     def test_for_duplicates(self) -> None:

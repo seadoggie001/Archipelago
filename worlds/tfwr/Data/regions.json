@@ -18,14 +18,13 @@
   {
     "name": "Hay",
     "parent": "Start",
+    "resource": "hay",
     "entrance_name": "Start to Hay"
   },
   {
     "name": "Wood",
     "parent": "Crop",
-    "requirements": [
-      "Trees"
-    ],
+    "resource": "wood",
     "entrance_name": "Crop to Wood"
   },
   {
@@ -34,6 +33,7 @@
     "requirements": [
       "Carrot"
     ],
+    "resource": "carrot",
     "entrance_name": "Crop to Carrot"
   },
   {
@@ -47,18 +47,18 @@
   },
   {
     "name": "Maze",
-    "parent": "WeirdSubstance",
+    "parent": "Crop",
     "requirements": [
       "Drone Speed",
       "Loop",
       "Fertilizer",
       "Mazes"
     ],
-    "entrance_name": "WeirdSubstance to Maze"
+    "entrance_name": "Crop to Maze"
   },
   {
     "name": "Sunflower",
-    "parent": "Carrot",
+    "parent": "Crop",
     "requirements": [
       "Drone Speed",
       "Loop",
@@ -66,11 +66,11 @@
       "Sunflowers",
       "Operators"
     ],
-    "entrance_name": "Carrot to Sunflower"
+    "entrance_name": "Crop to Sunflower"
   },
   {
     "name": "Pumpkins",
-    "parent": "Carrot",
+    "parent": "Crop",
     "requirements": [
       "Drone Speed",
       "Loop",
@@ -78,29 +78,33 @@
       "Carrot",
       "Variables"
     ],
-    "entrance_name": "Carrot to Pumpkins"
+    "resource": "pumpkin",
+    "entrance_name": "Crop to Pumpkins"
   },
   {
     "name": "Cactus",
-    "parent": "Pumpkins",
+    "parent": "Crop",
     "requirements": [
+      "Drone Speed",
       "Cactus",
-      "Operators"
+      "Operators",
+      "Variables"
     ],
-    "entrance_name": "Pumpkins to Cactus"
+    "resource": "cactus",
+    "entrance_name": "Crop to Cactus"
   },
   {
     "name": "Drones",
-    "parent": "Start",
+    "parent": "Crop",
     "requirements": [
       "Megafarm",
       "Functions"
     ],
-    "entrance_name": "Start to Drones"
+    "entrance_name": "Crop to Drones"
   },
   {
     "name": "Dinos",
-    "parent": "Cactus",
+    "parent": "Crop",
     "requirements": [
       "Dinosaurs",
       {
@@ -108,15 +112,8 @@
         "count": 2
       }
     ],
-    "entrance_name": "Cactus to Dinos"
-  },
-  {
-    "name": "EndGame",
-    "parent": "Dinos",
-    "requirements": [
-      "Functions"
-    ],
-    "entrance_name": "Dinos to EndGame"
+    "resource": "bone",
+    "entrance_name": "Crop to Dinos"
   },
   {
     "name": "GrassSanity",

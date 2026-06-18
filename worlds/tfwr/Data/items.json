@@ -63,9 +63,8 @@
   {
     "id": 11011,
     "name": "Mazes",
-    "count": 1,
-    "classification": 1,
-    "secondary_count": 5
+    "count": 5,
+    "classification": 1
   },
   {
     "id": 11012,
@@ -146,7 +145,8 @@
   {
     "id": 11027,
     "name": "Senses",
-    "count": 1
+    "count": 1,
+    "classification": 1
   },
   {
     "id": 11028,
