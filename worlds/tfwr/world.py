@@ -9,6 +9,7 @@ from . import items, locations, options, regions, rules, web_world
 from .Data.Crops import ALL_CROPS, Crops
 from .Data.Region import RegionNames
 
+
 class TFWRWorld(World):
     """
     Program and optimize a drone to automate a farm and watch it do the work for you. Collect resources to unlock better technology and become the most efficient farmer in the world. Improve your problem solving and coding skills.
@@ -20,7 +21,7 @@ class TFWRWorld(World):
 
     options_dataclass = options.TFWROptions
     # Something about mutability causes an error in PyLance
-    options: options.TFWROptions # type: ignore
+    options: options.TFWROptions  # type: ignore
 
     location_name_to_id = locations.LOCATION_NAME_TO_ID
     item_name_to_id = items.ITEM_NAME_TO_ID
@@ -45,10 +46,10 @@ class TFWRWorld(World):
 
     def create_item(self, name: str) -> items.TFWRItem:
         return items.create_item_with_correct_classification(self, name)
-    
+
     def get_filler_item_name(self) -> str:
         return items.get_random_filler_item_name(self)
-    
+
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         slot_data = self.options.as_dict(
@@ -74,14 +75,19 @@ class TFWRWorld(World):
         # The result of any starting crop can be used in a cost
         allowed_costs = {p.result for p in crops if p.starting_crop}
 
-        # Shuffle the order of crops
-        self.random.shuffle(crops)
+        shuffled_crops: list[Crops] = []
+        # Shuffle the order of crops by tier
+        for tier in range(1, 4):
+            temp_crops: list[Crops] = [crop for crop in crops if crop.tier == tier]
+            self.random.shuffle(temp_crops)
+            shuffled_crops.extend(temp_crops)
+
+        crops = shuffled_crops
 
         # For each crop
         for crop in crops:
-
-            # Don't add costs to the starting crops
-            if crop.starting_crop:
+            # Don't add costs to crops without a randomized cost
+            if not crop.randomized_cost:
                 pass
             else:
                 # Everything else will cost at least 1 item
@@ -99,7 +105,7 @@ class TFWRWorld(World):
                 # Add the crop with the randomized cost to the list
                 crop.cost = chosen_costs
 
-            if crop.result is not None:
+            if crop.used_for_cost:
                 # This item can be used as an ingredient now
                 allowed_costs.add(crop.result)
         return crops

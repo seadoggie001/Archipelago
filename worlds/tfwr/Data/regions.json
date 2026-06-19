@@ -24,6 +24,9 @@
   {
     "name": "Wood",
     "parent": "Crop",
+    "requirements": [
+      "Plant"
+    ],
     "resource": "wood",
     "entrance_name": "Crop to Wood"
   },
@@ -66,6 +69,7 @@
       "Sunflowers",
       "Operators"
     ],
+    "resource": "power",
     "entrance_name": "Crop to Sunflower"
   },
   {

@@ -59,6 +59,7 @@ ALL_REGION_DATA: list[RegionData] = [
     RegionData(
         name=RegionNames.Wood,
         parent=RegionNames.Crop,
+        requirements=[ItemNames.Plant],
         resource=Resources.Wood,
     ),
     RegionData(
@@ -95,6 +96,7 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Sunflowers,
             ItemNames.Operators
         ],
+        resource=Resources.Power,
     ),
     RegionData(
         name=RegionNames.Pumpkins,

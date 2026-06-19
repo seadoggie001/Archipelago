@@ -1,5 +1,6 @@
 from BaseClasses import ItemClassification
 from test.bases import WorldTestBase
+from ..Data.Crops import ALL_CROPS
 from ..Data.Item import ALL_ITEM_DATA, ItemNames
 from ..Data.Location import ALL_LOCATION_DATA
 from ..Data.Region import RegionNames, ALL_REGION_DATA
@@ -84,20 +85,17 @@ class TFWRTestBase(WorldTestBase):
                              loc.statistic and loc.statistic.key == crop_to_check and loc.statistic.value == expected_number),
                             None) is not None
 
-            for crop in [Resources.Wood, Resources.Hay, Resources.Carrot]:
+            for crop in [crop.result for crop in ALL_CROPS if crop.tier == 1]:
                 for number in ["10", "100", "1K", "10K", "100K", "1M", "10M", "100M", "1B"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
-            for crop in [Resources.Gold, Resources.Bone, Resources.Pumpkin]:
+            for crop in [crop.result for crop in ALL_CROPS if crop.tier == 2]:
                 for number in ["10", "100", "1K", "10K", "100K", "1M", "10M", "100M"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
-            for crop in [Resources.Cactus]:
+            for crop in [Resources.Cactus, Resources.Weird_Substance]:
                 for number in ["10", "100", "1K", "10K", "100K"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
             for crop in [Resources.Power]:
                 for number in ["10", "100", "1K", "9001", "100K"]:
-                    self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
-            for crop in [Resources.Weird_Substance]:
-                for number in ["10", "100", "1K", "10K", "100K"]:
                     self.assertTrue(contains_crop_value(crop, number), crop + " should contain " + number)
 
     def test_for_duplicates(self) -> None:

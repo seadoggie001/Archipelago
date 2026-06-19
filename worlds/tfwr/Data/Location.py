@@ -491,7 +491,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
     LocationData(
         15000,
         name="10 carrots",
-        description="Farm 100 carrots",
+        description="Farm 10 carrots",
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "10"),
     ),
