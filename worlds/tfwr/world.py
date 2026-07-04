@@ -54,7 +54,8 @@ class TFWRWorld(World):
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         slot_data = self.options.as_dict(
             "goal",
-            "crop_cost"
+            "crop_cost",
+            "grass_sanity",
         )
         if options.CropCost:
             for crop in self.crop_costs:
