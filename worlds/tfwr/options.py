@@ -14,6 +14,7 @@ class Goal(Choice):
     option_dinosaur_tail = 1
     """Create a dinosaur with a length of 1K"""
 
+
 class EarlyRiser(Toggle):
     """Require `plant` to be located early. Makes starting faster"""
     display_name = "Early Riser"
@@ -55,6 +56,7 @@ option_groups = [
         [
             Goal,
             EarlyRiser,
+            CropCost,
         ],
     ),
     OptionGroup(
