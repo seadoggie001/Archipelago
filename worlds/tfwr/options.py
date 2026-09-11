@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import OptionGroup, PerGameCommonOptions, Toggle, Choice
+from Options import OptionGroup, PerGameCommonOptions, Toggle, Choice, Range
 from .Data.Location import Options
 
 
@@ -38,12 +38,93 @@ class CropCost(Toggle):
     default = False
 
 
+class CropTarget10(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 10"
+    range_start = 2 # Because I said so
+    range_end = 10 * 1000 # 10K
+    default = 10
+
+
+class CropTarget100(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 100"
+    range_start = 2 # Because I said so
+    range_end = 100 * 1000 # 100K
+    default = 100
+
+
+class CropTarget1K(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 1K"
+    range_start = 2 # Because I said so
+    range_end = 1000 * 1000 # 1M
+    default = 1000 # 1K
+
+
+class CropTarget10K(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 10K"
+    range_start = 10
+    range_end = 10 * 1000 * 1000  # 10M
+    default = 10 * 1000  # 10K
+
+
+class CropTarget100K(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 100K"
+    range_start = 100
+    range_end = 100 * 1000 * 1000  # 100M
+    default = 100 * 1000  # 100K
+
+
+class CropTarget1M(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 1M"
+    range_start = 1000  # 1K
+    range_end = 1000 * 1000 * 1000  # 1B
+    default = 1000 * 1000  # 1M
+
+
+class CropTarget10M(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 10M"
+    range_start = 10 * 1000 # 10K
+    range_end = 10 * 1000 * 1000 * 1000 # 10B
+    default = 10 * 1000 * 1000 # 10M
+
+
+class CropTarget100M(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 100M"
+    range_start = 100 * 1000 # 100K
+    range_end = 100 * 1000 * 1000 * 1000 # 100B
+    default = 100 * 1000 * 1000 # 100M
+
+
+class CropTarget1B(Range):
+    """The number of crops to obtain for checks"""
+    display_name = "Crop Target - 1B"
+    range_start = 1000 * 1000 # 1M
+    range_end = 1000 * 1000 * 1000 * 1000 # 1T
+    default = 1000 * 1000 * 1000 # 1B
+
+
 @dataclass
 class TFWROptions(PerGameCommonOptions):
     early_riser: EarlyRiser
     grass_sanity: GrassSanity
     goal: Goal
     crop_cost: CropCost
+    crop_target_10: CropTarget10
+    crop_target_100: CropTarget100
+    crop_target_1K: CropTarget1K
+    crop_target_10K: CropTarget10K
+    crop_target_100K: CropTarget100K
+    crop_target_1M: CropTarget1M
+    crop_target_10M: CropTarget10M
+    crop_target_100M: CropTarget100M
+    crop_target_1B: CropTarget1B
 
 
 def valid_options(options: TFWROptions, option: str | None) -> bool:
@@ -69,6 +150,20 @@ option_groups = [
     OptionGroup(
         "Sanity",
         [GrassSanity],
+    ),
+    OptionGroup(
+        "Random Crop Targets",
+        [
+            CropTarget10,
+            CropTarget100,
+            CropTarget1K,
+            CropTarget10K,
+            CropTarget100K,
+            CropTarget1M,
+            CropTarget10M,
+            CropTarget100M,
+            CropTarget1B,
+        ]
     )
 ]
 

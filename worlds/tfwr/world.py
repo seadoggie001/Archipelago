@@ -30,8 +30,8 @@ class TFWRWorld(World):
 
     crop_costs: list[Crops]
 
-    def __init__(self, options: Any, player: int):
-        super().__init__(options, player)
+    def __init__(self, multiworld: Any, player: int):
+        super().__init__(multiworld, player)
         self.crop_costs = self.randomize_crop_cost()
 
     def create_regions(self) -> None:
@@ -56,6 +56,15 @@ class TFWRWorld(World):
             "goal",
             "crop_cost",
             "grass_sanity",
+            "crop_target_10",
+            "crop_target_100",
+            "crop_target_1K",
+            "crop_target_10K",
+            "crop_target_100K",
+            "crop_target_1M",
+            "crop_target_10M",
+            "crop_target_100M",
+            "crop_target_1B",
         )
         if options.CropCost:
             for crop in self.crop_costs:

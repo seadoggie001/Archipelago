@@ -31,7 +31,7 @@ class TFWRItem(Item):
 
 def get_random_filler_item_name(world: TFWRWorld) -> str:
     # Optionally, use a trap's name here with a random chance
-    world.random.shuffle(FILLER_ITEM_DATA)
+    world.random.choice(FILLER_ITEM_DATA)
     return FILLER_ITEM_DATA[0].name
 
 
