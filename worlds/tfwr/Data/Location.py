@@ -241,7 +241,11 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Get a dinosaur to length 1K",
         region=RegionNames.Dinos,
         achievement="SIZE_MATTERS",
-        requirements=[Requirement(ItemNames.Expand, 9)],
+        requirements=[
+            Requirement(ItemNames.Expand, 9),
+            Requirement(ItemNames.Dinosaurs, 4),
+            Requirement(ItemNames.Drone_Speed, 5),
+        ],
     ),
     LocationData(
         10021,
@@ -501,6 +505,9 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 100 carrots",
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "100"),
+        requirements=[
+            Requirement(ItemNames.Carrot, 2),
+        ]
     ),
     LocationData(
         15002,
@@ -509,7 +516,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Carrot,
         statistic=Statistic(Resources.Carrot, "1K"),
         requirements=[
-            ItemNames.Expand,
+            Requirement(ItemNames.Carrot, 2),
             Requirement(ItemNames.Expand, 2),
         ],
     ),
@@ -1043,14 +1050,20 @@ ALL_LOCATION_DATA: list[LocationData] = [
         name="Bone Farmer",
         description="Farm 100 Bones",
         region=RegionNames.Dinos,
-        statistic=Statistic(Resources.Bone, "100")
+        statistic=Statistic(Resources.Bone, "100"),
+        requirements=[
+            ItemNames.Loop,
+        ]
     ),
     LocationData(
         21002,
         name="1K Bones",
         description="Farm 1K Bones",
         region=RegionNames.Dinos,
-        statistic=Statistic(Resources.Bone, "1K")
+        statistic=Statistic(Resources.Bone, "1K"),
+        requirements=[
+            ItemNames.Loop,
+        ]
     ),
     LocationData(
         21003,
@@ -1058,7 +1071,11 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Farm 10K Bones",
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "10K"),
-        requirements=[Requirement(ItemNames.Dinosaurs, 2)],
+        requirements=[
+            ItemNames.Loop,
+            Requirement(ItemNames.Dinosaurs, 2),
+            ItemNames.Sunflowers,
+        ],
     ),
     LocationData(
         21004,
@@ -1067,6 +1084,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "100K"),
         requirements=[
+            ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 3),
             Requirement(ItemNames.Expand, 5),
         ],
@@ -1078,6 +1096,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "1M"),
         requirements=[
+            ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 4),
             Requirement(ItemNames.Expand, 6),
         ],
@@ -1089,6 +1108,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "10M"),
         requirements=[
+            ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 4),
             Requirement(ItemNames.Expand, 7),
         ],
@@ -1100,6 +1120,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         region=RegionNames.Dinos,
         statistic=Statistic(Resources.Bone, "100M"),
         requirements=[
+            ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 5),
             Requirement(ItemNames.Expand, 8),
         ],
@@ -1107,10 +1128,11 @@ ALL_LOCATION_DATA: list[LocationData] = [
     LocationData(
         21008,
         name="Dino Master",
-        description="Farm 100M bones",
+        description="Farm 1M bones in 1 minute",
         region=RegionNames.Dinos,
         timed=TimedStatistic(Resources.Bone, "1M", "1m"),
         requirements=[
+            ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 5),
             RuleNames.MaxedOutFarm,
         ]

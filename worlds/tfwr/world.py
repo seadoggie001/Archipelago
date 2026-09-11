@@ -72,21 +72,18 @@ class TFWRWorld(World):
 
     def randomize_crop_cost(self):
 
-        crops = ALL_CROPS
         # The result of any starting crop can be used in a cost
-        allowed_costs = {p.result for p in crops if p.starting_crop}
+        allowed_costs = {p.result for p in ALL_CROPS if p.starting_crop}
 
         shuffled_crops: list[Crops] = []
         # Shuffle the order of crops by tier
         for tier in range(1, 4):
-            temp_crops: list[Crops] = [crop for crop in crops if crop.tier == tier]
+            temp_crops: list[Crops] = [crop for crop in ALL_CROPS if crop.tier == tier]
             self.random.shuffle(temp_crops)
             shuffled_crops.extend(temp_crops)
 
-        crops = shuffled_crops
-
         # For each crop
-        for crop in crops:
+        for crop in shuffled_crops:
             # Don't add costs to crops without a randomized cost
             if not crop.randomized_cost:
                 pass
@@ -109,4 +106,4 @@ class TFWRWorld(World):
             if crop.used_for_cost:
                 # This item can be used as an ingredient now
                 allowed_costs.add(crop.result)
-        return crops
+        return shuffled_crops

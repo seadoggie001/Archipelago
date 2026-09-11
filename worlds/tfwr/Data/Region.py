@@ -105,7 +105,6 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Drone_Speed,
             ItemNames.Loop,
             ItemNames.Pumpkins,
-            ItemNames.Carrot,
             ItemNames.Variables
         ],
         resource=Resources.Pumpkin,
@@ -126,7 +125,7 @@ ALL_REGION_DATA: list[RegionData] = [
         parent=RegionNames.Crop,
         requirements=[
             ItemNames.Megafarm,
-            ItemNames.Functions
+            ItemNames.Functions,
         ],
     ),
     RegionData(
