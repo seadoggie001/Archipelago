@@ -5,7 +5,10 @@ from .Data.Location import Options
 
 
 class Goal(Choice):
-    """Select how the game will end"""
+    """Select how the game will end
+
+    - **Gold:** collect 1K gold.
+    - **Dinosaur Tail:** create a dinosaur tail 1K blocks long. This is almost the entire farm."""
     display_name = "Goal"
 
     option_gold = 0
@@ -16,17 +19,21 @@ class Goal(Choice):
 
 
 class EarlyRiser(Toggle):
-    """Require `plant` to be located early. Makes starting faster"""
+    """Require the ``plant`` item to be located early. Makes starting faster"""
     display_name = "Early Riser"
 
 
 class GrassSanity(Toggle):
-    """Adds a check to each square of the farm. Harvest grass there to complete the check."""
+    """Adds a check to each square of the farm. Harvest grass to complete the check."""
     display_name = "Grass Sanity"
     default = False
 
 
 class CropCost(Toggle):
+    """Randomizes the cost of planting crops.
+
+    - Hay and Bushes are always free.
+    - Max of 2 items per crop."""
     display_name = "Randomized Crop Cost"
     default = False
 

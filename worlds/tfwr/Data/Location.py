@@ -31,7 +31,7 @@ class LocationData:
     achievement: str | None = None
     '''Internal game achievement name'''
     statistic: Statistic | None = None
-    '''Statistic used to determine how the location is granted. Should be unused here.'''
+    '''Statistic used to determine how the location is granted'''
     timed: TimedStatistic | None = None
     '''A Statistic that must be completed in a set amount of time'''
     option: str | None = None
