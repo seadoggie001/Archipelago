@@ -507,6 +507,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Carrot, "100"),
         requirements=[
             Requirement(ItemNames.Carrot, 2),
+            ItemNames.Expand,
         ]
     ),
     LocationData(
@@ -847,6 +848,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Power, "9001"),
         requirements=[
             Requirement(ItemNames.Expand, 4),
+            Requirement(ItemNames.Drone_Speed, 2),
+            Requirement(ItemNames.Megafarm, 2),
             ItemNames.Megafarm,
             ItemNames.Functions,
         ],
@@ -859,7 +862,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Power, "100K"),
         requirements=[
             Requirement(ItemNames.Expand, 5),
-            Requirement(ItemNames.Megafarm, 2),
+            Requirement(ItemNames.Drone_Speed, 3),
+            Requirement(ItemNames.Megafarm, 3),
             ItemNames.Functions,
         ],
     ),
@@ -1063,6 +1067,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Bone, "1K"),
         requirements=[
             ItemNames.Loop,
+            Requirement(ItemNames.Expand, 3),
         ]
     ),
     LocationData(
@@ -1074,7 +1079,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         requirements=[
             ItemNames.Loop,
             Requirement(ItemNames.Dinosaurs, 2),
-            ItemNames.Sunflowers,
+            Requirement(ItemNames.Expand, 4),
         ],
     ),
     LocationData(

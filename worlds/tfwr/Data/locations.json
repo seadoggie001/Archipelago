@@ -681,6 +681,10 @@
     "region": "Carrot",
     "requirements": [
       {
+        "name": "Expand",
+        "count": 1
+      },
+      {
         "name": "Carrot",
         "count": 2
       }
@@ -1340,6 +1344,14 @@
         "count": 1
       },
       {
+        "name": "Megafarm",
+        "count": 2
+      },
+      {
+        "name": "Drone Speed",
+        "count": 2
+      },
+      {
         "name": "Expand",
         "count": 4
       }
@@ -1361,7 +1373,11 @@
       },
       {
         "name": "Megafarm",
-        "count": 2
+        "count": 3
+      },
+      {
+        "name": "Drone Speed",
+        "count": 3
       },
       {
         "name": "Expand",
@@ -1701,6 +1717,10 @@
     "region": "Dinos",
     "requirements": [
       {
+        "name": "Expand",
+        "count": 3
+      },
+      {
         "name": "Loop",
         "count": 1
       }
@@ -1717,8 +1737,8 @@
     "region": "Dinos",
     "requirements": [
       {
-        "name": "Sunflowers",
-        "count": 1
+        "name": "Expand",
+        "count": 4
       },
       {
         "name": "Dinosaurs",
