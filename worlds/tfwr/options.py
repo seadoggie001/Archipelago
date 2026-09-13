@@ -38,6 +38,14 @@ class CropCost(Toggle):
     default = False
 
 
+class TrapPercentage(Range):
+    """Percentage of traps that replace filler items"""
+    display_name = "Trap Percentage"
+    range_start = 0
+    range_end = 100
+    default = 1
+
+
 class CropTarget10(Range):
     """The number of crops to obtain for checks"""
     display_name = "Crop Target - 10"
@@ -116,6 +124,7 @@ class TFWROptions(PerGameCommonOptions):
     grass_sanity: GrassSanity
     goal: Goal
     crop_cost: CropCost
+    trap_percentage: TrapPercentage
     crop_target_10: CropTarget10
     crop_target_100: CropTarget100
     crop_target_1K: CropTarget1K
@@ -145,6 +154,7 @@ option_groups = [
             Goal,
             EarlyRiser,
             CropCost,
+            TrapPercentage,
         ],
     ),
     OptionGroup(

@@ -71,6 +71,14 @@ FILLER_ITEM_DATA: list[ItemData] = [
     ),
 ]
 
+TRAP_ITEM_DATA: list[ItemData] = [
+    ItemData(
+        id=13001,
+        name="Rick Roll",
+        classification=ItemClassification.trap
+    ),
+]
+
 REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11001,
@@ -229,15 +237,11 @@ REGULAR_ITEM_DATA: list[ItemData] = [
         id=11035,
         name=ItemNames.Unlock,
         classification=ItemClassification.filler
-    ),
-    ItemData(
-        id=11036,
-        name=ItemNames.Rickroll,
-        classification=ItemClassification.trap
     )
 ]
 
 ALL_ITEM_DATA: list[ItemData] = (
         REGULAR_ITEM_DATA
         + FILLER_ITEM_DATA
+        + TRAP_ITEM_DATA
 )

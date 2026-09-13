@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
-from .Data.Item import ALL_ITEM_DATA, FILLER_ITEM_DATA, REGULAR_ITEM_DATA, ItemNames
+from .Data.Item import ALL_ITEM_DATA, FILLER_ITEM_DATA, REGULAR_ITEM_DATA, TRAP_ITEM_DATA, ItemNames
 
 if TYPE_CHECKING:
     from .world import TFWRWorld
@@ -30,9 +30,12 @@ class TFWRItem(Item):
 
 
 def get_random_filler_item_name(world: TFWRWorld) -> str:
-    # Optionally, use a trap's name here with a random chance
-    world.random.choice(FILLER_ITEM_DATA)
-    return FILLER_ITEM_DATA[0].name
+    # if the random number is under the percentage
+    if world.random.randint(0, 99) < world.options.trap_percentage:
+        # it's a trap
+        return world.random.choice(TRAP_ITEM_DATA).name
+    # return a filler item
+    return world.random.choice(FILLER_ITEM_DATA).name
 
 
 def create_item_with_correct_classification(world: TFWRWorld, name: str,
@@ -50,17 +53,13 @@ def create_all_items(world: TFWRWorld) -> None:
     item_pool: list[TFWRItem] = []
     # Create every upgrade item
     for item in REGULAR_ITEM_DATA:
-        if item.classification == ItemClassification.filler:
-            # move it to the filler item pool
-            FILLER_ITEM_DATA.append(item)
-        else:
-            # for each copy needed
-            for i in range(0, item.count):
-                item_pool.append(create_item_with_correct_classification(world, item.name, item.classification))
-            # for each secondary copy
-            for i in range(0, item.secondary_count):
-                item_pool.append(
-                    create_item_with_correct_classification(world, item.name, item.secondary_classification))
+        # for each copy needed
+        for i in range(0, item.count):
+            item_pool.append(create_item_with_correct_classification(world, item.name, item.classification))
+        # for each secondary copy
+        for i in range(0, item.secondary_count):
+            item_pool.append(
+                create_item_with_correct_classification(world, item.name, item.secondary_classification))
 
     # Get count of items
     number_of_items: int = len(item_pool)
