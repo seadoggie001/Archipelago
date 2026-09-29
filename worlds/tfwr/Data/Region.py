@@ -44,7 +44,7 @@ ALL_REGION_DATA: list[RegionData] = [
     ),
     RegionData(
         name=RegionNames.Crop,
-        parent=RegionNames.Start,
+        parent=RegionNames.Hay,
         requirements=[ItemNames.Plant],
     ),
     RegionData(

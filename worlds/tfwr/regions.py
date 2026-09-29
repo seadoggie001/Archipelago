@@ -38,20 +38,4 @@ def create_all_regions(world: TFWRWorld) -> None:
 def connect_regions(world: TFWRWorld) -> None:
     """Connect regions via entrances"""
 
-    # get all regions by name
-    # region = world.get_region("Region 1 Name")
-
-    # probably should cache results from world.get_region?
-    regions: dict[str, Region] = {}
-
-    regionData: RegionData
-    for regionData in ALL_REGION_DATA:
-        region = world.get_region(regionData.name)
-        regions[regionData.name] = region
-        # Set up entrance if needed
-        if regionData.parent is not None:
-            regions[regionData.parent].connect(region, regionData.entrance_name)
-
-    # Entrances can be optional
-    # if ####:
-    #     region1.connect(region3, "Optional Entrance Name")
+    # Do nothing. Defer connecting the regions until rule generation to simplify logic.

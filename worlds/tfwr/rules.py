@@ -6,7 +6,7 @@ from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, Rule, True_, HasAny, CanReachLocation, CanReachRegion
 from .Data.Item import ItemNames
 from .Data.Location import ALL_LOCATION_DATA, LocationData
-from .Data.Region import ALL_REGION_DATA, RegionData
+from .Data.Region import ALL_REGION_DATA, RegionData, RegionNames
 from .Data.Rules import RuleNames, Requirement
 from .options import valid_options, Goal
 
@@ -24,10 +24,39 @@ def set_all_rules(world: TFWRWorld) -> None:
 
 
 def set_all_entrance_rules(world: TFWRWorld) -> None:
-    for region_data in ALL_REGION_DATA:
-        if region_data.requirements is not None:
-            entrance = world.get_entrance(region_data.entrance_name)
-            world.set_rule(entrance, resolve_region_rules(world, region_data))
+    regionData: RegionData
+    for regionData in ALL_REGION_DATA:
+        entrance_names = []
+
+        custom_entrance = False
+        region = world.get_region(regionData.name)
+        # if we're using crop randomization and this is a crop-region
+        if world.options.crop_cost.value and regionData.resource:
+            # Locate the produced crop
+            crop = next(c for c in world.crop_costs if c.result == regionData.resource)
+            # For each crop required to plant this crop
+            for crop_cost in crop.cost:
+                # Find the region associated with that crop
+                region_name_to_connect = next(c for c in ALL_REGION_DATA if c.resource == crop_cost).name
+                if region_name_to_connect == RegionNames.Hay:
+                    region_name_to_connect = RegionNames.Crop
+                # Define an entrance name
+                name = f"{region_name_to_connect} -> {regionData.name}"
+                # Connect the two regions
+                world.get_region(region_name_to_connect).connect(region, name)
+                # Save the entrance name
+                entrance_names.append(f"{region_name_to_connect} -> {regionData.name}")
+
+        # If no entrance names were created
+        if entrance_names.__len__() == 0:
+            # Set up entrance if needed
+            if regionData.parent is not None:
+                world.get_region(regionData.parent).connect(region, regionData.entrance_name)
+                entrance_names = [regionData.entrance_name]
+
+        for entrance_name in entrance_names:
+            entrance = world.get_entrance(entrance_name)
+            world.set_rule(entrance, resolve_region_rules(world, regionData))
 
 
 def set_all_location_rules(world: TFWRWorld) -> None:
@@ -38,7 +67,7 @@ def set_all_location_rules(world: TFWRWorld) -> None:
 
 
 def resolve_location_rules(world: TFWRWorld, loc: LocationData) -> Rule[TFWRWorld]:
-    loc_rule = resolve_rules(loc.requirements)
+    loc_rule = parse_requirements(loc.requirements)
     # If the location has a statistic
     if loc.statistic is not None:
         # Get the cost of the crop
@@ -64,7 +93,7 @@ def resolve_location_rules(world: TFWRWorld, loc: LocationData) -> Rule[TFWRWorl
 
 
 def resolve_region_rules(world: TFWRWorld, region: RegionData) -> Rule[TFWRWorld]:
-    rule = resolve_rules(region.requirements)
+    rule = parse_requirements(region.requirements)
     # If this region is for a crop (ie: it produces a resource)
     if region.resource is not None:
         # Find the related crop cost
@@ -78,59 +107,58 @@ def resolve_region_rules(world: TFWRWorld, region: RegionData) -> Rule[TFWRWorld
     return rule
 
 
-def resolve_rules(loc_requirements: list[Requirement | str] | None) -> Rule[TFWRWorld]:
+def parse_requirements(requirements: list[Requirement | str] | None) -> Rule[TFWRWorld]:
     rule: Rule[TFWRWorld] = True_()
-    if loc_requirements is not None:
-        for requirement in loc_requirements:
-            # If it's not a rule
-            if requirement not in RuleNames.Rules:
-                # If it's a string
-                if isinstance(requirement, str):
-                    if requirement in ItemNames.ALL_UPGRADES:
-                        rule &= Has(requirement)
-                    else:
-                        # throw some error
-                        raise ValueError(
-                            "This item is not contained in RULE.Rules or ItemNames.ALL_UPGRADES. Value " + requirement)
-                # Handle requirement objects
-                elif isinstance(requirement, Requirement):
-                    rule &= Has(requirement.name, count=requirement.count)
-                else:
-                    raise ValueError("I have no idea what this rule is. " + requirement)
+    if requirements is None:
+        return rule
+
+    for requirement in requirements:
+        if requirement in RuleNames.Rules:
+            match requirement:
+                case RuleNames.AnyHatItems:
+                    rule &= HasAny(ItemNames.Hats, ItemNames.TopHat)
+                case RuleNames.ReallyBigFarm:
+                    rule &= Has(ItemNames.Expand, 9)
+                case RuleNames.CropsThatCanProduceWeirdSubstance:
+
+                    def find_location_by_id(number):
+                        for loc in ALL_LOCATION_DATA:
+                            if loc.id == number:
+                                return loc.name
+                        raise ValueError("Unexpected Location ID not found in data: " + number)
+
+                    rule &= (
+                            Has(ItemNames.Grass, 2)
+                            # Plant Carrots
+                            | (CanReachLocation(find_location_by_id(12002)) & Has(ItemNames.Carrot, 2))
+                            # Plant Trees
+                            | CanReachLocation(find_location_by_id(12006))
+                            # Plant Carrots
+                            | (CanReachLocation(find_location_by_id(12005)) & Has(ItemNames.Cactus, 2))
+                            # Plant Pumpkins
+                            | CanReachLocation(find_location_by_id(12003))
+                    )
+                case RuleNames.MaxedOutFarm:
+                    rule &= Has(ItemNames.Expand, 9)
+                    rule &= Has(ItemNames.Drone_Speed, 5)
+                    rule &= Has(ItemNames.Megafarm, 5)
+                    rule &= Has(ItemNames.Functions)
+                case _:
+                    # throw some error
+                    raise ValueError(
+                        "Great job! You made a string for a rule, but forgot to actually make the rule in rules.py[resolve_rules]")
+        # If it's a string
+        elif isinstance(requirement, str):
+            if requirement in ItemNames.ALL_UPGRADES:
+                rule &= Has(requirement)
             else:
-                match requirement:
-                    case RuleNames.AnyHatItems:
-                        rule &= HasAny(ItemNames.Hats, ItemNames.TopHat)
-                    case RuleNames.ReallyBigFarm:
-                        rule &= Has(ItemNames.Expand, 9)
-                    case RuleNames.CropsThatCanProduceWeirdSubstance:
-
-                        def find_location_by_id(number):
-                            for loc in ALL_LOCATION_DATA:
-                                if loc.id == number:
-                                    return loc.name
-                            raise ValueError("Unexpected Location ID not found in data: " + number)
-
-                        rule &= (
-                                Has(ItemNames.Grass, 2)
-                                # Plant Carrots
-                                | (CanReachLocation(find_location_by_id(12002)) & Has(ItemNames.Carrot, 2))
-                                # Plant Trees
-                                | CanReachLocation(find_location_by_id(12006))
-                                # Plant Carrots
-                                | (CanReachLocation(find_location_by_id(12005)) & Has(ItemNames.Cactus, 2))
-                                # Plant Pumpkins
-                                | CanReachLocation(find_location_by_id(12003))
-                        )
-                    case RuleNames.MaxedOutFarm:
-                        rule &= Has(ItemNames.Expand, 9)
-                        rule &= Has(ItemNames.Drone_Speed, 5)
-                        rule &= Has(ItemNames.Megafarm, 5)
-                        rule &= Has(ItemNames.Functions)
-                    case _:
-                        # throw some error
-                        raise ValueError(
-                            "Great job! You made a string for a rule, but forgot to actually make the rule in rules.py[resolve_rules]")
+                # throw some error
+                raise ValueError("{0} is not contained in RULE.Rules or ItemNames.ALL_UPGRADES".format(requirement))
+        # If it's a requirement object
+        elif isinstance(requirement, Requirement):
+            rule &= Has(requirement.name, count=requirement.count)
+        else:
+            raise ValueError("I have no idea what this rule is. Found: {0}".format(requirement))
     return rule
 
 
