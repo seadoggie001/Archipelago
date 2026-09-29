@@ -28,8 +28,6 @@ class TFWRWorld(World):
 
     origin_region_name = RegionNames.Start
 
-    crop_costs: list[Crops]
-
     def __init__(self, multiworld: Any, player: int):
         super().__init__(multiworld, player)
         self.crop_costs = self.randomize_crop_cost()
