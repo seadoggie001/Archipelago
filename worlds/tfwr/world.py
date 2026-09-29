@@ -1,7 +1,7 @@
 from collections.abc import Mapping
 from typing import Any
 
-import Utils
+import copy
 # Imports of base Archipelago modules must be absolute.
 from worlds.AutoWorld import World
 
@@ -82,12 +82,12 @@ class TFWRWorld(World):
     def randomize_crop_cost(self):
 
         # The result of any starting crop can be used in a cost
-        allowed_costs = {p.result for p in ALL_CROPS if p.starting_crop}
+        allowed_costs = {p.result for p in copy.deepcopy(ALL_CROPS) if p.starting_crop}
 
         shuffled_crops: list[Crops] = []
         # Shuffle the order of crops by tier
         for tier in range(1, 4):
-            temp_crops: list[Crops] = [crop for crop in ALL_CROPS if crop.tier == tier]
+            temp_crops: list[Crops] = [crop for crop in copy.deepcopy(ALL_CROPS) if crop.tier == tier]
             self.random.shuffle(temp_crops)
             shuffled_crops.extend(temp_crops)
 
