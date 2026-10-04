@@ -38,7 +38,7 @@ class TestDinosaurGoalLogic(TFWRTestBase):
             regions: list[str] = ["Start"]
             for region in regions:
                 Utils.visualize_regions(self.world.get_region(region),
-                                        folder + region + "_Hard.puml",
+                                        folder + region + "_Dino_Grassless.puml",
                                         regions_to_highlight=state.reachable_regions[self.player],
                                         )
 

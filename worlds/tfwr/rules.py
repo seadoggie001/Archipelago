@@ -34,8 +34,8 @@ def set_all_entrance_rules(world: TFWRWorld) -> None:
         if world.options.crop_cost.value and regionData.resource:
             # Locate the produced crop
             crop = next(c for c in world.crop_costs if c.result == regionData.resource)
-            # For each crop required to plant this crop
-            for crop_cost in crop.cost:
+            # For each unique crop required to plant this crop
+            for crop_cost in list(dict.fromkeys(crop.cost)):
                 # Find the region associated with that crop
                 region_name_to_connect = next(c for c in ALL_REGION_DATA if c.resource == crop_cost).name
                 if region_name_to_connect == RegionNames.Hay:
@@ -45,7 +45,7 @@ def set_all_entrance_rules(world: TFWRWorld) -> None:
                 # Connect the two regions
                 world.get_region(region_name_to_connect).connect(region, name)
                 # Save the entrance name
-                entrance_names.append(f"{region_name_to_connect} -> {regionData.name}")
+                entrance_names.append(name)
 
         # If no entrance names were created
         if entrance_names.__len__() == 0:
@@ -70,6 +70,7 @@ def resolve_location_rules(world: TFWRWorld, loc: LocationData) -> Rule[TFWRWorl
     loc_rule = parse_requirements(loc.requirements)
     # If the location has a statistic
     if loc.statistic is not None:
+        cost:list[str] | None
         # Get the cost of the crop
         cost = next((p.cost for p in world.crop_costs if p.name.lower() == loc.statistic.key), None)
         # If the crop has a cost
@@ -89,7 +90,38 @@ def resolve_location_rules(world: TFWRWorld, loc: LocationData) -> Rule[TFWRWorl
                 if parent_loc is not None:
                     loc_rule &= CanReachLocation(parent_loc.name)
             # print(loc.name + "\t--\t" + loc_rule.resolve(world).explain_str())
+        # Lazily fix locations missing loop requirements
+        if parse_statistic(loc.statistic.value) > 100:
+            loc_rule &= Has(ItemNames.Loop)
+    elif loc.region == RegionNames.Crop and loc.achievement is not None:
+        # get the related crop
+        crop = loc.achievement.replace("PLANT_", "").replace("CARROTS", "CARROT").lower()
+        # get the crop cost
+        resource_cost: list[str] = next((p.cost for p in world.crop_costs if p.name.lower() == crop))
+        # for each unique item that the crop costs
+        for resource in list(dict.fromkeys(resource_cost)):
+            # Find the item that unlocks this resource
+            item_name = next((crop.item for crop in world.crop_costs if crop.result == resource))
+            if item_name is not None:
+                # Require the related item
+                loc_rule &= Has(item_name)
     return loc_rule
+
+
+def parse_statistic(num:str) -> int:
+    if num[-1].isalpha():
+        multiplier = num[-1]
+        value = int(num[:-1])
+        if multiplier == "K":
+            return value * 1000
+        elif multiplier == "M":
+            return value * 1000 * 1000
+        elif multiplier == "B":
+            return value * 1000 * 1000 * 1000
+        else:
+            raise ValueError("I don't know what this value is. " + num)
+    else:
+        return int(num)
 
 
 def resolve_region_rules(world: TFWRWorld, region: RegionData) -> Rule[TFWRWorld]:

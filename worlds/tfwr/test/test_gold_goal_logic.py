@@ -38,7 +38,7 @@ class TestGoldGoalLogic(TFWRTestBase):
             regions: list[str] = ["Start"]
             for region in regions:
                 Utils.visualize_regions(self.world.get_region(region),
-                                        folder + region + "_Easy.puml",
+                                        folder + region + "_Gold_Grass.puml",
                                         regions_to_highlight=state.reachable_regions[self.player],
                                         )
 

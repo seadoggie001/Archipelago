@@ -27,14 +27,18 @@ class RegionNames:
 @dataclass
 class RegionData:
     name: str
-    parent: str = None
+    parent: str | None = None
     requirements: list[str | Requirement] | None = None
-    resource: str = None
+    '''A list of ItemNames, RuleNames, or Requirement objects'''
+
+    resource: str | None = None
+    '''Resource produced by this region'''
+
     entrance_name: str = ""
 
     def __post_init__(self):
         if self.parent is not None:
-            self.entrance_name = f"{self.parent} to {self.name}"
+            self.entrance_name = f"{self.parent} -> {self.name}"
 
 
 # This list must be sorted like a hierarchy: Dependent regions come after their parents
