@@ -108,6 +108,7 @@ def resolve_region_rules(world: TFWRWorld, region: RegionData) -> Rule[TFWRWorld
 
 
 def parse_requirements(requirements: list[Requirement | str] | None) -> Rule[TFWRWorld]:
+    """Converts a list of requirements into OptionBuilder-style rules"""
     rule: Rule[TFWRWorld] = True_()
     if requirements is None:
         return rule
@@ -143,6 +144,8 @@ def parse_requirements(requirements: list[Requirement | str] | None) -> Rule[TFW
                     rule &= Has(ItemNames.Drone_Speed, 5)
                     rule &= Has(ItemNames.Megafarm, 5)
                     rule &= Has(ItemNames.Functions)
+                case RuleNames.CanTill:
+                    rule &= Has(ItemNames.Carrot)
                 case _:
                     # throw some error
                     raise ValueError(

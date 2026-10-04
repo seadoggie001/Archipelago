@@ -11,7 +11,9 @@ class RuleNames:
     """the player has a crop that produces multiple items"""
     MaxedOutFarm = "Maxed out farm"
     """the player has the largest farm, all drones, and all speed"""
-    Rules: list[str] = [AnyHatItems, ReallyBigFarm, CropsThatCanProduceWeirdSubstance, MaxedOutFarm]
+    CanTill = "Can till"
+    """the player has the till() ability. This is just carrots for now"""
+    Rules: list[str] = [AnyHatItems, ReallyBigFarm, CropsThatCanProduceWeirdSubstance, MaxedOutFarm, CanTill]
 
 
 @dataclasses.dataclass

@@ -65,7 +65,10 @@ ALL_REGION_DATA: list[RegionData] = [
     RegionData(
         name=RegionNames.Carrot,
         parent=RegionNames.Crop,
-        requirements=[ItemNames.Carrot],
+        requirements=[
+            ItemNames.Carrot,
+            RuleNames.CanTill,
+        ],
         resource=Resources.Carrot,
     ),
     RegionData(
@@ -73,7 +76,7 @@ ALL_REGION_DATA: list[RegionData] = [
         parent=RegionNames.Crop,
         requirements=[
             RuleNames.CropsThatCanProduceWeirdSubstance,
-            ItemNames.Fertilizer
+            ItemNames.Fertilizer,
         ],
     ),
     RegionData(
@@ -83,7 +86,7 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Drone_Speed,
             ItemNames.Loop,
             ItemNames.Fertilizer,
-            ItemNames.Mazes
+            ItemNames.Mazes,
         ],
     ),
     RegionData(
@@ -94,7 +97,8 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Loop,
             ItemNames.Variables,
             ItemNames.Sunflowers,
-            ItemNames.Operators
+            ItemNames.Operators,
+            RuleNames.CanTill,
         ],
         resource=Resources.Power,
     ),
@@ -105,7 +109,8 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Drone_Speed,
             ItemNames.Loop,
             ItemNames.Pumpkins,
-            ItemNames.Variables
+            ItemNames.Variables,
+            RuleNames.CanTill,
         ],
         resource=Resources.Pumpkin,
     ),
@@ -116,7 +121,8 @@ ALL_REGION_DATA: list[RegionData] = [
             ItemNames.Drone_Speed,
             ItemNames.Cactus,
             ItemNames.Operators,
-            ItemNames.Variables
+            ItemNames.Variables,
+            RuleNames.CanTill,
         ],
         resource=Resources.Cactus,
     ),

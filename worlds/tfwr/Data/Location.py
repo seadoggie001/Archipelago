@@ -348,7 +348,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Plant a carrot",
         region=RegionNames.Crop,
         achievement="PLANT_CARROTS",
-        requirements=[ItemNames.Carrot],
+        requirements=[ItemNames.Carrot, RuleNames.CanTill],
     ),
     LocationData(
         12003,
@@ -356,7 +356,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Plant a pumpkin",
         region=RegionNames.Crop,
         achievement="PLANT_PUMPKIN",
-        requirements=[ItemNames.Carrot, ItemNames.Pumpkins],
+        requirements=[ItemNames.Pumpkins, RuleNames.CanTill],
     ),
     LocationData(
         12004,
@@ -364,7 +364,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Plant a sunflower",
         region=RegionNames.Crop,
         achievement="PLANT_SUNFLOWER",
-        requirements=[ItemNames.Sunflowers],
+        requirements=[ItemNames.Sunflowers, RuleNames.CanTill],
     ),
     LocationData(
         12005,
@@ -372,7 +372,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Plant a cactus",
         region=RegionNames.Crop,
         achievement="PLANT_CACTUS",
-        requirements=[ItemNames.Carrot, ItemNames.Pumpkins, ItemNames.Cactus],
+        requirements=[ItemNames.Cactus, RuleNames.CanTill],
     ),
     LocationData(
         12006,
@@ -380,7 +380,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Plant a tree",
         region=RegionNames.Crop,
         achievement="PLANT_TREE",
-        requirements=[ItemNames.Trees]
+        requirements=[ItemNames.Trees],
     ),
     # endregion
     # region 13Ks Hay
