@@ -50,14 +50,18 @@ class ItemNames:
     Dictionaries = "Dictionaries"
     Costs = "Costs"
     Unlock = "Unlock"
-    Rickroll = "Rickroll"
+
+
+    Rickroll = "Rick Roll Trap"
+    FreeHay = "Free Hay"
+
     ALL_UPGRADES: list[str] = [
         Loop, Drone_Speed, Hats, Grass, Expand, Plant, Carrot, Watering, Cactus, Fertilizer, Sunflowers,
         Mazes, TopHat, Trees, Pumpkins, Polyculture,
         Dinosaurs, Megafarm, TheFarmersRemains,
         Debug, MoreDebug, Timing, Simulation,
         Operators, Senses, Variables, Functions, Import, Utilities,
-        Lists, Dictionaries, Costs, Unlock, Rickroll
+        Lists, Dictionaries, Costs, Unlock
     ]
 
 
@@ -66,7 +70,7 @@ UpgradeName = "++"
 FILLER_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=12001,
-        name="Free Hay",
+        name=ItemNames.FreeHay,
         classification=ItemClassification.filler
     ),
 ]
@@ -74,7 +78,7 @@ FILLER_ITEM_DATA: list[ItemData] = [
 TRAP_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=13001,
-        name="Rick Roll",
+        name=ItemNames.Rickroll,
         classification=ItemClassification.trap
     ),
 ]

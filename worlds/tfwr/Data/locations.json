@@ -374,6 +374,10 @@
     "region": "Crop",
     "requirements": [
       {
+        "name": "Can till",
+        "count": 1
+      },
+      {
         "name": "Carrot",
         "count": 1
       }
@@ -387,11 +391,11 @@
     "region": "Crop",
     "requirements": [
       {
-        "name": "Pumpkins",
+        "name": "Can till",
         "count": 1
       },
       {
-        "name": "Carrot",
+        "name": "Pumpkins",
         "count": 1
       }
     ],
@@ -403,6 +407,10 @@
     "description": "Plant a sunflower",
     "region": "Crop",
     "requirements": [
+      {
+        "name": "Can till",
+        "count": 1
+      },
       {
         "name": "Sunflowers",
         "count": 1
@@ -417,15 +425,11 @@
     "region": "Crop",
     "requirements": [
       {
+        "name": "Can till",
+        "count": 1
+      },
+      {
         "name": "Cactus",
-        "count": 1
-      },
-      {
-        "name": "Pumpkins",
-        "count": 1
-      },
-      {
-        "name": "Carrot",
         "count": 1
       }
     ],

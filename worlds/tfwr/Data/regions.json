@@ -4,22 +4,22 @@
   },
   {
     "name": "Crop",
-    "parent": "Start",
+    "parent": "Hay",
     "requirements": [
       "Plant"
     ],
-    "entrance_name": "Start to Crop"
+    "entrance_name": "Hay -> Crop"
   },
   {
     "name": "Flip",
     "parent": "Start",
-    "entrance_name": "Start to Flip"
+    "entrance_name": "Start -> Flip"
   },
   {
     "name": "Hay",
     "parent": "Start",
     "resource": "hay",
-    "entrance_name": "Start to Hay"
+    "entrance_name": "Start -> Hay"
   },
   {
     "name": "Wood",
@@ -28,16 +28,17 @@
       "Plant"
     ],
     "resource": "wood",
-    "entrance_name": "Crop to Wood"
+    "entrance_name": "Crop -> Wood"
   },
   {
     "name": "Carrot",
     "parent": "Crop",
     "requirements": [
-      "Carrot"
+      "Carrot",
+      "Can till"
     ],
     "resource": "carrot",
-    "entrance_name": "Crop to Carrot"
+    "entrance_name": "Crop -> Carrot"
   },
   {
     "name": "WeirdSubstance",
@@ -46,7 +47,7 @@
       "Crops that can produce Weird Substance",
       "Fertilizer"
     ],
-    "entrance_name": "Crop to WeirdSubstance"
+    "entrance_name": "Crop -> WeirdSubstance"
   },
   {
     "name": "Maze",
@@ -57,7 +58,7 @@
       "Fertilizer",
       "Mazes"
     ],
-    "entrance_name": "Crop to Maze"
+    "entrance_name": "Crop -> Maze"
   },
   {
     "name": "Sunflower",
@@ -67,10 +68,11 @@
       "Loop",
       "Variables",
       "Sunflowers",
-      "Operators"
+      "Operators",
+      "Can till"
     ],
     "resource": "power",
-    "entrance_name": "Crop to Sunflower"
+    "entrance_name": "Crop -> Sunflower"
   },
   {
     "name": "Pumpkins",
@@ -79,10 +81,11 @@
       "Drone Speed",
       "Loop",
       "Pumpkins",
-      "Variables"
+      "Variables",
+      "Can till"
     ],
     "resource": "pumpkin",
-    "entrance_name": "Crop to Pumpkins"
+    "entrance_name": "Crop -> Pumpkins"
   },
   {
     "name": "Cactus",
@@ -91,10 +94,11 @@
       "Drone Speed",
       "Cactus",
       "Operators",
-      "Variables"
+      "Variables",
+      "Can till"
     ],
     "resource": "cactus",
-    "entrance_name": "Crop to Cactus"
+    "entrance_name": "Crop -> Cactus"
   },
   {
     "name": "Drones",
@@ -103,7 +107,7 @@
       "Megafarm",
       "Functions"
     ],
-    "entrance_name": "Crop to Drones"
+    "entrance_name": "Crop -> Drones"
   },
   {
     "name": "Dinos",
@@ -116,11 +120,11 @@
       }
     ],
     "resource": "bone",
-    "entrance_name": "Crop to Dinos"
+    "entrance_name": "Crop -> Dinos"
   },
   {
     "name": "GrassSanity",
     "parent": "Start",
-    "entrance_name": "Start to GrassSanity"
+    "entrance_name": "Start -> GrassSanity"
   }
 ]
