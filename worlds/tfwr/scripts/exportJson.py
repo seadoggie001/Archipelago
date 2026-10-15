@@ -3,9 +3,11 @@ import os
 import sys
 
 import json
-from worlds.tfwr.Data.Location import ALL_LOCATION_DATA, Requirement
-from worlds.tfwr.Data.Item import ALL_ITEM_DATA
-from worlds.tfwr.Data.Region import ALL_REGION_DATA
+
+from worlds.tfwr.Data.Crops import Crops, ALL_CROPS
+from worlds.tfwr.Data.Location import ALL_LOCATION_DATA, Requirement, LocationData
+from worlds.tfwr.Data.Item import ALL_ITEM_DATA, ItemData
+from worlds.tfwr.Data.Region import ALL_REGION_DATA, RegionData
 
 
 # I copied this class from a stackoverflow answer about how to easily export dataclasses to json
@@ -19,8 +21,29 @@ class DataclassWithoutNoneJSONEncoder(json.JSONEncoder):
 def dump_data(data, filename: str) -> None:
     filepath = os.path.join(folder_path, filename)
     with open(filepath, "w") as file:
-        json.dump(data, file, indent=2, cls=DataclassWithoutNoneJSONEncoder)
+        json.dump(data, file, cls=DataclassWithoutNoneJSONEncoder)
     print("Created: ", filepath)
+
+
+def normalize_requirements(things: list[LocationData | RegionData]) -> list[LocationData | RegionData]:
+    for thing in things:
+        if thing.requirements is None: continue
+        requirements: list[Requirement] = []
+        while len(thing.requirements) > 0:
+            req = thing.requirements.pop()
+            if isinstance(req, str):
+                req = Requirement(req, 1)
+            requirements.append(req)
+        thing.requirements = requirements
+    return things
+
+
+@dataclasses.dataclass
+class Data:
+    locations: list[LocationData]
+    regions: list[RegionData]
+    items: list[ItemData]
+    crops: list[Crops]
 
 
 if __name__ == '__main__':
@@ -31,16 +54,7 @@ if __name__ == '__main__':
     print("Generating JSON output. . .")
     folder_path = os.path.join("worlds", "tfwr", "Data")
 
-    for location in ALL_LOCATION_DATA:
-        if location.requirements is None: continue
-        requirements: list[Requirement] = []
-        while len(location.requirements) > 0:
-            req = location.requirements.pop()
-            if isinstance(req, str):
-                req = Requirement(req, 1)
-            requirements.append(req)
-        location.requirements = requirements
+    data = Data(normalize_requirements(ALL_LOCATION_DATA), normalize_requirements(ALL_REGION_DATA), ALL_ITEM_DATA,
+                ALL_CROPS)
 
-    dump_data(ALL_LOCATION_DATA, "locations.json")
-    dump_data(ALL_REGION_DATA, "regions.json")
-    dump_data(ALL_ITEM_DATA, "items.json")
+    dump_data(data, "data.json")
