@@ -34,8 +34,19 @@ def get_random_filler_item_name(world: TFWRWorld) -> str:
     if world.random.randint(0, 99) < world.options.trap_percentage:
         # it's a trap
         return world.random.choice(TRAP_ITEM_DATA).name
-    # return a filler item
-    return world.random.choice(FILLER_ITEM_DATA).name
+
+    # Get a random filler item's name
+    name = world.random.choice([item for item in world.filler_item_pool])
+
+    # If there are a limited number of this filler item
+    if world.filler_item_pool[name] is not None:
+        world.filler_item_pool[name] -= 1
+        # Delete the item if there are 0 left
+        if world.filler_item_pool[name] == 0:
+            world.filler_item_pool.pop(name)
+
+    # return a filler item name
+    return name
 
 
 def create_item_with_correct_classification(world: TFWRWorld, name: str,
@@ -50,17 +61,37 @@ def create_all_items(world: TFWRWorld) -> None:
     if world.options.early_riser:
         world.multiworld.local_early_items[world.player][ItemNames.Plant] = 1
 
-    item_pool: list[TFWRItem] = []
-    # Create every upgrade item
-    for item in REGULAR_ITEM_DATA:
-        # for each copy needed
-        for i in range(0, item.count):
-            item_pool.append(create_item_with_correct_classification(world, item.name, item.classification))
-        # for each secondary copy
-        for i in range(0, item.secondary_count):
-            item_pool.append(
-                create_item_with_correct_classification(world, item.name, item.secondary_classification))
+    filler_item_pool: dict[str, int | None] = {}
 
+    item_pool: list[TFWRItem] = []
+    # Create every non-filler item
+    for item in REGULAR_ITEM_DATA:
+        if item.classification == ItemClassification.filler:
+            filler_item_pool[item.name] = item.count
+        else:
+            # for each copy needed
+            for i in range(0, item.count):
+                item_pool.append(create_item_with_correct_classification(world, item.name, item.classification))
+
+        # if there is no secondary count, continue
+        if item.secondary_count <= 0:
+            continue
+
+        # If the secondary type is a filler
+        if item.secondary_classification == ItemClassification.filler:
+            filler_item_pool[item.name] = item.secondary_count
+        else:
+            # for each secondary copy
+            for i in range(0, item.secondary_count):
+               item_pool.append(
+                   create_item_with_correct_classification(world, item.name, item.secondary_classification))
+
+    # Include all filler items as special, unlimited filler
+    for item in FILLER_ITEM_DATA:
+        filler_item_pool[item.name] = None
+
+    # Use the filler pool to help create items
+    world.filler_item_pool = filler_item_pool
     # Get count of items
     number_of_items: int = len(item_pool)
     # Get count of missing items

@@ -30,7 +30,8 @@ class TFWRWorld(World):
 
     def __init__(self, multiworld: Any, player: int):
         super().__init__(multiworld, player)
-        self.crop_costs = self.randomize_crop_cost()
+        self.crop_costs: list[Crops] = self.randomize_crop_cost()
+        self.filler_item_pool: dict[str, int | None] = {}
 
     def create_regions(self) -> None:
         regions.create_and_connect_regions(self)
