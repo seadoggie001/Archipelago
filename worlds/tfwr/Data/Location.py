@@ -134,7 +134,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         description="Make the entire farm have a water level > 0.5",
         region=RegionNames.Start,
         achievement="MUD_FARM",
-        requirements=[ItemNames.Watering]
+        requirements=[ItemNames.Watering, ItemNames.MoreDebug]
     ),
     LocationData(
         10007,
@@ -305,7 +305,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Flips, "1K"),
         requirements=[
             ItemNames.Loop,
-            ItemNames.Megafarm,
+            Requirement(ItemNames.Megafarm, 2),
             ItemNames.Functions,
         ],
     ),
@@ -317,7 +317,7 @@ ALL_LOCATION_DATA: list[LocationData] = [
         statistic=Statistic(Resources.Flips, "10K"),
         requirements=[
             ItemNames.Loop,
-            Requirement(ItemNames.Megafarm, 3),
+            Requirement(ItemNames.Megafarm, 4),
             ItemNames.Functions,
         ],
     ),
@@ -331,6 +331,8 @@ ALL_LOCATION_DATA: list[LocationData] = [
             ItemNames.Loop,
             Requirement(ItemNames.Megafarm, 5),
             ItemNames.Functions,
+            ItemNames.PowerFlip,
+            ItemNames.Sunflowers,
         ],
     ),
     # endregion

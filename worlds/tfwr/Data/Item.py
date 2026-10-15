@@ -50,6 +50,8 @@ class ItemNames:
     Dictionaries = "Dictionaries"
     Costs = "Costs"
     Unlock = "Unlock"
+    PowerFlip = "PowerFlip"
+    Teleport = "Teleport"
 
 
     Rickroll = "Rick Roll Trap"
@@ -61,7 +63,7 @@ class ItemNames:
         Dinosaurs, Megafarm, TheFarmersRemains,
         Debug, MoreDebug, Timing, Simulation,
         Operators, Senses, Variables, Functions, Import, Utilities,
-        Lists, Dictionaries, Costs, Unlock
+        Lists, Dictionaries, Costs, Unlock, PowerFlip, Teleport
     ]
 
 
@@ -183,8 +185,6 @@ REGULAR_ITEM_DATA: list[ItemData] = [
     ItemData(
         id=11022,
         name=ItemNames.MoreDebug,
-        count=1,
-        classification=ItemClassification.filler
     ),
     ItemData(
         id=11023,
@@ -241,6 +241,15 @@ REGULAR_ITEM_DATA: list[ItemData] = [
         id=11035,
         name=ItemNames.Unlock,
         classification=ItemClassification.filler
+    ),
+    ItemData(
+        id=11036,
+        name=ItemNames.PowerFlip,
+    ),
+    ItemData(
+        id=11037,
+        name=ItemNames.Teleport,
+        classification=ItemClassification.useful
     )
 ]
 
